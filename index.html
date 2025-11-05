@@ -20,9 +20,8 @@
         }
         
         header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(#0e0e10);
             color: white;
-            padding: 3rem 2rem;
             text-align: center;
         }
         
@@ -145,19 +144,35 @@
             color: #dc3545;
             margin-bottom: 1rem;
         }
+        .image-container {
+          width: 100vw;        /* full screen width */
+          height: 50vh;        /* or any height you want */
+          overflow: hidden;    /* hide overflow */
+        }
+
+        .image-container img {
+          width: 70%;
+          height: 100%;
+          object-fit: cover;   /* ensures image fills container and keeps aspect ratio */
+        }
+
+
     </style>
 </head>
 <body>
     <header>
-        <img src="https://www.teknologilab.no/static/teknologilab_full_color.png" alt="Teknologilab logo" width="120px" height="120px" style="margin-bottom: 1rem;">
-        <h1>Teknologilab</h1>
-        <p>Vi utforsker programmering, robotikk og problemløsning gjennom teknologi</p>
+        <div class="image-container">
+            <img src="https://www.teknologilab.no/static/teknologilab_full_color.png" alt="Teknologilab logo" width="120px" height="120px" style="margin-bottom: 1rem;">
+        </div>
+        
     </header>
     
     <div class="container">
+        
+
         <div class="info-box">
             <h2>Velkommen til Teknologilab!</h2>
-            <p>Her lærer barn å programmere, bruke AI, bygge og programmere LEGO, og delta i robotkonkurranser. Vi skaper et inspirerende miljø hvor kreativitet og teknologi møtes!</p>
+            <p>Vi utforsker programmering, robotikk og problemløsning gjennom teknologi</p>
         </div>
         
         <div class="pilot-info">
