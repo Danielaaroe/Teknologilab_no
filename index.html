@@ -144,18 +144,22 @@
             color: #dc3545;
             margin-bottom: 1rem;
         }
-        .image-container {
-          width: 100vw;        /* full screen width */
-          height: 35vw;        /* or any height you want */
-          overflow: hidden;    /* hide overflow */
-        }
+.image-container {
+  width: 100vw;
+  height: 50vw; /* more vertical space */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-        .image-container img {
-          width: 70%;
-          height:100%;
-          object-fit: cover;   /* ensures image fills container and keeps aspect ratio */
-          transform: translateY(-5%); /* move image up */
-        }
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateY(-8%); /* fine-tune position */
+}
+
 
 
     </style>
@@ -163,7 +167,7 @@
 <body>
     <header>
         <div class="image-container">
-            <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo" width="120px" height="120px" style="margin-bottom: 1rem;">
+            <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo">
         </div>
         
     </header>
