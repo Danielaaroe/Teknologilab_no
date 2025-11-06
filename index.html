@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknologilab - Blindheim Barneskole</title>
-
     <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon">
     <style>
         * {
@@ -13,26 +12,82 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: #2c3e50;
+            --header-bg: #0e0e10;
+            --activity-bg-1: #2c3e50;
+            --activity-bg-2: #34495e;
+            --shadow: rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-card: #252525;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-color: #4a90e2;
+            --header-bg: #0e0e10;
+            --activity-bg-1: #3a3a3a;
+            --activity-bg-2: #4a4a4a;
+            --shadow: rgba(0,0,0,0.3);
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s, color 0.3s;
         }
         
         header {
-            background: linear-gradient(#0e0e10);
+            background: var(--header-bg);
             color: white;
             text-align: center;
+            position: relative;
         }
         
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            z-index: 10;
         }
         
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+        
+        .image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .image-container img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
         }
         
         .container {
@@ -42,15 +97,15 @@
         }
         
         .info-box {
-            background: #f8f9fa;
-            border-left: 4px solid #2c3e50;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--border-color);
             padding: 1.5rem;
             margin: 2rem 0;
             border-radius: 4px;
         }
         
         .info-box h2 {
-            color: #2c3e50;
+            color: var(--border-color);
             margin-bottom: 1rem;
         }
         
@@ -62,10 +117,10 @@
         }
         
         .detail-card {
-            background: white;
+            background: var(--bg-card);
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px var(--shadow);
             transition: transform 0.3s ease;
         }
         
@@ -74,7 +129,7 @@
         }
         
         .detail-card h3 {
-            color: #2c3e50;
+            color: var(--border-color);
             margin-bottom: 0.5rem;
         }
         
@@ -83,7 +138,7 @@
         }
         
         .activities h2 {
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 1rem;
         }
         
@@ -95,7 +150,7 @@
         }
         
         .activity-item {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, var(--activity-bg-1) 0%, var(--activity-bg-2) 100%);
             color: white;
             padding: 1.5rem;
             border-radius: 8px;
@@ -104,7 +159,7 @@
         }
         
         .instructors {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             padding: 2rem;
             border-radius: 8px;
             margin: 2rem 0;
@@ -112,6 +167,7 @@
         
         .instructors h2 {
             margin-bottom: 1rem;
+            color: var(--text-primary);
         }
         
         footer {
@@ -129,9 +185,10 @@
             border-left: 4px solid #ffc107;
             margin: 1.5rem 0;
             font-weight: 500;
+            color: #856404;
         }
         
-        .pilot-info { /* Stil for pilot-info */
+        .pilot-info {
             background: #ffe0e6;
             border-left: 4px solid #dc3545;
             padding: 1.5rem;
@@ -145,36 +202,34 @@
             margin-bottom: 1rem;
         }
 
-        .image-container {
-          width: 100vw;
-          height: 50vw; /* more vertical space */
-          overflow: hidden;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        @media (max-width: 768px) {
+            .image-container {
+                height: 180px;
+                padding: 1rem;
+            }
+            
+            .image-container img {
+                max-width: 400px;
+            }
+            
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
         }
-
-        .image-container img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transform: translateY(-8%); /* fine-tune position */
-        }
-
-
-
     </style>
 </head>
 <body>
     <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
         <div class="image-container">
             <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo">
         </div>
-        
     </header>
     
     <div class="container">
-    
         <div class="info-box">
             <h2>Velkommen til Teknologilab!</h2>
             <p>Vi utforsker programmering, robotikk og problemløsning gjennom teknologi</p>
@@ -182,7 +237,7 @@
         
         <div class="pilot-info">
             <h2>⚠️ Pilotinformasjon – Begrenset tilgang</h2>
-            <p>Vi kjører for øyeblikket en **pilot** for Teknologilaben. Fra **januar** vil vi åpne for flere elever, men det er et **begrenset antall plasser**. Vi anbefaler å ta kontakt raskt for mer informasjon om påmelding!</p>
+            <p>Vi kjører for øyeblikket en <strong>pilot</strong> for Teknologilaben. Fra <strong>januar</strong> vil vi åpne for flere elever, men det er et <strong>begrenset antall plasser</strong>. Vi anbefaler å ta kontakt raskt for mer informasjon om påmelding!</p>
         </div>
         
         <div class="details">
@@ -198,7 +253,7 @@
             
             <div class="detail-card">
                 <h3>👥 Hvem</h3>
-                <p>For elever i **6. trinn**</p>
+                <p>For elever i <strong>6. trinn</strong></p>
             </div>
         </div>
         
@@ -209,7 +264,7 @@
         <div class="activities">
             <h2>Hva gjør vi?</h2>
             <div class="activity-grid">
-                <div class="activity-item">💻 Programmering (blant annet med **micro:bit**)</div>
+                <div class="activity-item">💻 Programmering (blant annet med <strong>micro:bit</strong>)</div>
                 <div class="activity-item">🤖 Kunstig Intelligens</div>
                 <div class="activity-item">🧱 Bygge LEGO</div>
                 <div class="activity-item">⚡ LEGO Programmering</div>
@@ -220,13 +275,13 @@
         
         <div class="instructors">
             <h2>Hvem driver laben?</h2>
-            <p>Teknologilaben er **foreldredrevet** av **Gunnar** og **Daniel**, begge ingeniører med lidenskap for teknologi. Vi skaper et trygt og inspirerende læringsmiljø hvor alle kan utforske og eksperimentere. Vi har vært så heldige å få benytte skolens utstyr og læringsbrett, så det er gratis å delta!</p>
+            <p>Teknologilaben er <strong>foreldredrevet</strong> av <strong>Gunnar</strong> og <strong>Daniel</strong>, begge ingeniører med lidenskap for teknologi. Vi skaper et trygt og inspirerende læringsmiljø hvor alle kan utforske og eksperimentere. Vi har vært så heldige å få benytte skolens utstyr og læringsbrett, så det er gratis å delta!</p>
         </div>
         
         <div class="info-box">
             <h2>Svært begrenset antall plasser</h2>
             <p>Her er det bare å være nysgjerrig, stille spørsmål, og ha det gøy mens du lærer!</p>
-            <p style="margin-top: 1rem;">**Kontakt oss for mer informasjon**</p>
+            <p style="margin-top: 1rem;"><strong>Kontakt oss for mer informasjon</strong></p>
         </div>
     </div>
     
@@ -234,5 +289,19 @@
         <p>Teknologilab - Blindheim Barneskole</p>
         <p>Tirsdag 17:00-19:00</p>
     </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </body>
 </html>
