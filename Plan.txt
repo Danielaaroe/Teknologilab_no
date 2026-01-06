@@ -1,0 +1,25 @@
+
+Alle leksjoner bør inneholde både hardware og software. Dette bør i utgangspunktet foregå 
+kronologisk, men for avanserte leksjoner over flere økter kan dette foregå paralellt.
+
+
+Samling 1:
+
+1. Installere applikasjon
+2. Koble til en Spike
+3. Grunnleggende brukergrensesnitt og kontroll(styre en motor)
+
+Samling 2:
+1. Trykksensor - grunnleggende.
+2. Prosjekt med trykksensor.
+
+Samling 3:
+1. Ultralydsensor - grunnleggende.
+2. Prosjekt med ultralydsensor.
+
+Samling 4:
+1. Lys/fargesensor - grunnleggende.
+2. Prosjekt med lys/fargesensor.
+
+Samling 5:
+Større prosjekt med kombinasjon av sensorer.
