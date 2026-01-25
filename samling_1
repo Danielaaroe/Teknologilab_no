@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGO Spike Prime Guide - Teknologilab</title>
+    <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: #2c3e50;
+            --header-bg: #0e0e10;
+            --activity-bg-1: #2c3e50;
+            --activity-bg-2: #34495e;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --success-bg: #d4edda;
+            --success-border: #28a745;
+            --success-text: #155724;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffc107;
+            --warning-text: #856404;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-card: #252525;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-color: #4a90e2;
+            --header-bg: #0e0e10;
+            --activity-bg-1: #3a3a3a;
+            --activity-bg-2: #4a4a4a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --success-bg: #2a3a2a;
+            --success-border: #4a7;
+            --success-text: #b0e0b0;
+            --warning-bg: #3a3a2a;
+            --warning-border: #b8860b;
+            --warning-text: #e0d090;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .image-container img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--border-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box h2 {
+            color: var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin: 2.5rem 0;
+        }
+
+        .section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+        }
+
+        ol, ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        ol li, ul li {
+            margin: 0.5rem 0;
+        }
+
+        .install-steps {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .install-steps ol {
+            margin-left: 1.5rem;
+        }
+
+        .app-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--activity-bg-1) 0%, var(--activity-bg-2) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .app-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-card h3 {
+            background: linear-gradient(135deg, var(--activity-bg-1) 0%, var(--activity-bg-2) 100%);
+            color: white;
+            padding: 1rem;
+            font-size: 1rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .resources-list {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .resources-list ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .resources-list a {
+            color: var(--border-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .resources-list a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                height: 180px;
+                padding: 1rem;
+            }
+
+            .image-container img {
+                max-width: 400px;
+            }
+
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+        <div class="image-container">
+            <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📱 Installasjon på iPad</h2>
+            <p>For å bruke LEGO Spike Prime må du først laste ned appen til din iPad.</p>
+            
+            <div class="install-steps">
+                <h3>Slik installerer du LEGO Education SPIKE™ appen:</h3>
+                <ol>
+                    <li>Åpne <strong>Intune Bedriftsportal</strong> (Company Portal) på din iPad</li>
+                    <li>Logg inn med skolekontoen din hvis du ikke allerede er innlogget</li>
+                    <li>Søk etter <strong>"LEGO Education SPIKE"</strong> eller finn den under tilgjengelige apper</li>
+                    <li>Trykk på <strong>"Installer"</strong> knappen</li>
+                    <li>Vent til appen er ferdig installert</li>
+                    <li>Åpne appen og følg oppstartsveiledningen</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h2>💡 Tips</h2>
+            <p>Pass på at iPaden din har iOS 13.0 eller nyere for best kompatibilitet med SPIKE™ appen.</p>
+        </div>
+
+        <div class="section">
+            <h2>🎥 Opplæringsvideoer</h2>
+            <p>Her finner du nyttige videoer som viser deg hvordan du kommer i gang:</p>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <h3>Komme i gang med SPIKE Prime</h3>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/Y3vN_TMV1mY" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <h3>Kjøre en motor</h3>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/9t3Ki4CwhSg" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <h3>Endre språk i SPIKE™ appen</h3>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/mBpwWr0YmIo" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <h3>Grunnleggende programmering</h3>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/7MhJN1yNrN4" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Nyttige ressurser</h2>
+            <div class="resources-list">
+                <ul>
+                    <li>🔗 <a href="https://education.lego.com/en-us/downloads/spike-prime/software" target="_blank">Offisiell LEGO Education nedlastingsside</a></li>
+                    <li>🔗 <a href="https://education.lego.com/en-us/support/spike-prime" target="_blank">LEGO Spike Prime støtteside</a></li>
+                    <li>🔗 <a href="https://education.lego.com/en-us/product-resources/spike-prime/downloads" target="_blank">Lærerressurser og leksjonsplaner</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Teknologilab</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
