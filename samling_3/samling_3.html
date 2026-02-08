@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pariserhjul Del 2 - Programmering og Sensorer - Teknologilab</title>
+    <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text: #333;
+            --border: #2c3e50;
+            --header-bg: #0e0e10;
+            --code-bg: #f5f5f5;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text: #e0e0e0;
+            --border: #4a90e2;
+            --code-bg: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .image-container img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin: 2.5rem 0;
+        }
+
+        .section h2 {
+            margin-bottom: 1rem;
+            color: var(--border);
+        }
+
+        .section h3 {
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .steps ol, .steps ul {
+            margin: 1rem 0 0 1.5rem;
+        }
+
+        .steps li {
+            margin: 0.5rem 0;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--border);
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: var(--border);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: transform 0.2s;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .warning {
+            background: #3a3a2a;
+            color: #e0d090;
+            border-left-color: #b8860b;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .success {
+            background: #2a3a2a;
+            color: #90e0a0;
+            border-left-color: #28a745;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                height: 180px;
+                padding: 1rem;
+            }
+
+            .image-container img {
+                max-width: 400px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .theme-toggle {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+        <div class="image-container">
+            <a href="/index.html"><img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>🎡 Pariserhjul Del 2: Programmering og Sensorer</h2>
+            <p>Nå som du har bygget pariserhjulet, skal vi lære å programmere det med sekvenser, løkker og sensorer. Dette er hvor robotikken virkelig våkner til live!</p>
+            
+            <div class="success">
+                <strong>📋 Forutsetninger:</strong> Du bør ha fullført Del 1 og ha et ferdig bygget pariserhjul. Hvis du ikke har gjort det ennå, <a href="/samling_2/samling_2.html" style="color: inherit; text-decoration: underline;">start med Del 1 her</a>.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Læringsmål</h2>
+            <div class="info-box">
+                <p>I denne økten skal du lære:</p>
+                <ul>
+                    <li><strong>Sekvenser:</strong> Hvordan instruksjoner utføres i rekkefølge</li>
+                    <li><strong>Løkker:</strong> Hvordan gjenta handlinger automatisk</li>
+                    <li><strong>Sensorer:</strong> Hvordan roboten kan reagere på omgivelsene</li>
+                    <li><strong>Betingelser:</strong> Hvordan roboten tar beslutninger</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Del 1: Sekvenser - Steg for steg</h2>
+            <p>En sekvens er en liste med instruksjoner som utføres i rekkefølge, én etter én. Dette er grunnlaget for all programmering!</p>
+
+            <div class="info-box">
+                <h3>Oppgave 1.1: Din første sekvens</h3>
+                <p>Lag et program som gjør følgende i rekkefølge:</p>
+                <div class="code-block">
+1. Vis et smilefjes på hubben
+2. Roter motoren 90 grader (en kvart omdreining)
+3. Vent 2 sekunder
+4. Roter motoren 90 grader til
+5. Vis et annet ikon
+                </div>
+                <p><strong>Spørsmål:</strong> Hva skjer hvis du bytter om på rekkefølgen?</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Oppgave 1.2: Fire stopp</h3>
+                <p>Utvid programmet til å stoppe ved alle fire gondolene (4 x 90 grader).</p>
+                <div class="code-block">
+Når programmet starter
+  Vis ikon (smilefjes)
+  Roter motor 90 grader
+  Vent 2 sekunder
+  Roter motor 90 grader
+  Vent 2 sekunder
+  Roter motor 90 grader
+  Vent 2 sekunder
+  Roter motor 90 grader
+  Vis ikon (stjerne)
+                </div>
+                <p><strong>Utfordring:</strong> Legg til lyd ved hvert stopp!</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔁 Del 2: Løkker - Gjenta automatisk</h2>
+            <p>Løkker lar deg gjenta kode uten å skrive den om og om igjen. Det finnes to typer løkker i SPIKE:</p>
+
+            <div class="info-box">
+                <h3>Oppgave 2.1: Gjenta for alltid</h3>
+                <p>Bruk en "Gjenta for alltid"-løkke for å la pariserhjulet rotere kontinuerlig:</p>
+                <div class="code-block">
+Når programmet starter
+  Gjenta for alltid:
+    Roter motor 90 grader
+    Vent 2 sekunder
+                </div>
+                <p><strong>Tips:</strong> Trykk på stopp-knappen for å stoppe programmet!</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Oppgave 2.2: Gjenta 10 ganger</h3>
+                <p>Bruk en "Gjenta N ganger"-løkke for å kjøre pariserhjulet et bestemt antall runder:</p>
+                <div class="code-block">
+Når programmet starter
+  Gjenta 10 ganger:
+    Roter motor 90 grader
+    Vent 1 sekund
+  Vis ikon (ferdig!)
+                </div>
+                <p><strong>Spørsmål:</strong> Hvor mange gondol-stopp blir dette til sammen? (Hint: 10 x 4)</p>
+            </div>
+
+            <div class="warning">
+                <strong>💡 Debugging-tips:</strong> Hvis pariserhjulet roterer for fort eller for sakte, endre ventetiden eller motorhastigheten. Prøv forskjellige verdier til det ser riktig ut!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔘 Del 3: Sensorer - La roboten føle</h2>
+            <p>Sensorer gjør at roboten kan reagere på verden rundt seg. La oss bruke sensorer til å styre pariserhjulet!</p>
+
+            <div class="info-box">
+                <h3>Oppgave 3.1: Start med kraftsensor</h3>
+                <p>Koble til en kraftsensor (den runde knappen) og bruk den til å starte pariserhjulet:</p>
+                <div class="code-block">
+Når programmet starter
+  Vent til kraftsensor trykkes
+  Vis ikon (start!)
+  Gjenta 4 ganger:
+    Roter motor 90 grader
+    Vent 2 sekunder
+                </div>
+                <p><strong>Port:</strong> Husk å koble kraftsensoren til en port (A, B, C, D, E eller F)!</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Oppgave 3.2: Stopp med kraftsensor</h3>
+                <p>Bruk kraftsensoren til å stoppe pariserhjulet når som helst:</p>
+                <div class="code-block">
+Når programmet starter
+  Gjenta til kraftsensor trykkes:
+    Roter motor 90 grader
+    Vent 1 sekund
+  Stopp motor
+  Vis ikon (stoppet!)
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Oppgave 3.3: Avstandssensor (hvis tilgjengelig)</h3>
+                <p>Hvis du har en avstandssensor, bruk den til å oppdage passasjerer:</p>
+                <div class="code-block">
+Når programmet starter
+  Gjenta for alltid:
+    Hvis avstandssensor < 10 cm:
+      Vis ikon (person oppdaget!)
+      Vent 3 sekunder
+    Roter motor 90 grader
+    Vent 2 sekunder
+                </div>
+                <p><strong>Idé:</strong> Plasser avstandssensoren slik at den ser når noen står foran pariserhjulet!</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🤔 Del 4: Betingelser - La roboten bestemme</h2>
+            <p>Betingelser (hvis-så) lar roboten ta beslutninger basert på sensor-data.</p>
+
+            <div class="info-box">
+                <h3>Oppgave 4.1: Ulike hastigheter</h3>
+                <p>La kraftsensoren bestemme hastigheten:</p>
+                <div class="code-block">
+Når programmet starter
+  Gjenta for alltid:
+    Hvis kraftsensor trykkes hardt (> 50%):
+      Roter motor 180 grader med hastighet 75%
+    Ellers:
+      Roter motor 90 grader med hastighet 30%
+    Vent 1 sekund
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Oppgave 4.2: Telle passasjerer</h3>
+                <p>Bruk en variabel til å telle hvor mange ganger pariserhjulet har stoppet:</p>
+                <div class="code-block">
+Når programmet starter
+  Sett variabel "passasjerer" til 0
+  Gjenta 10 ganger:
+    Roter motor 90 grader
+    Vent 2 sekunder
+    Endre variabel "passasjerer" med 1
+    Vis variabel "passasjerer" på hubben
+  Vis ikon (ferdig!)
+                </div>
+                <p><strong>Tips:</strong> Dette er nyttig for å holde oversikt over hvor mange "turer" som er gjennomført!</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏆 Del 5: Utfordringsprosjekter</h2>
+            
+            <div class="info-box">
+                <h3>Utfordring A: Billettsystem</h3>
+                <p>Lag et system der:</p>
+                <ul>
+                    <li>Kraftsensor = "kjøp billett"</li>
+                    <li>Roboten teller antall billetter</li>
+                    <li>Etter 4 billetter starter pariserhjulet automatisk</li>
+                    <li>Etter turen, nullstill telleren</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Utfordring B: Nødstopp-system</h3>
+                <p>Lag et sikkerhets-system:</p>
+                <ul>
+                    <li>Pariserhjulet roterer kontinuerlig</li>
+                    <li>Hvis kraftsensor trykkes (nødstopp): stopp umiddelbart</li>
+                    <li>Blink rødt lys på hubben</li>
+                    <li>Spill alarm-lyd</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Utfordring C: Flerfarge-system</h3>
+                <p>Hvis du har fargesensor:</p>
+                <ul>
+                    <li>Rød farge = stopp pariserhjulet</li>
+                    <li>Grønn farge = start pariserhjulet</li>
+                    <li>Blå farge = sakte rotasjon</li>
+                    <li>Gul farge = rask rotasjon</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Utfordring D: VIP-gondol</h3>
+                <p>Avansert prosjekt:</p>
+                <ul>
+                    <li>En gondol er "VIP" (marker den fysisk)</li>
+                    <li>Når VIP-gondolen er nederst: stopp ekstra lenge (5 sekunder)</li>
+                    <li>Vis spesielt ikon og spill lyd for VIP</li>
+                    <li>Hint: Bruk motor-posisjon eller tell rotasjoner for å vite hvor VIP-gondolen er</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧠 Konsepter du har lært</h2>
+            <div class="info-box">
+                <h3>Programmering:</h3>
+                <ul>
+                    <li><strong>Sekvens:</strong> Instruksjoner i rekkefølge</li>
+                    <li><strong>Løkke:</strong> Gjenta kode (for alltid / N ganger / til betingelse)</li>
+                    <li><strong>Betingelse:</strong> Hvis-så logikk</li>
+                    <li><strong>Variabel:</strong> Lagre og endre verdier (f.eks. teller)</li>
+                </ul>
+
+                <h3>Sensorer:</h3>
+                <ul>
+                    <li><strong>Kraftsensor:</strong> Oppdager trykk (0-100%)</li>
+                    <li><strong>Avstandssensor:</strong> Måler avstand (0-200 cm)</li>
+                    <li><strong>Fargesensor:</strong> Gjenkjenner farger</li>
+                </ul>
+
+                <h3>Motor:</h3>
+                <ul>
+                    <li><strong>Rotasjon:</strong> Grader (360° = full runde)</li>
+                    <li><strong>Hastighet:</strong> 0-100% (+ eller -)</li>
+                    <li><strong>Posisjon:</strong> Spore motorens vinkel</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>❓ Feilsøking</h2>
+            <div class="info-box steps">
+                <ul>
+                    <li><strong>Sensoren reagerer ikke:</strong> Sjekk at kabelen er koblet til riktig port og velg riktig port i programmet</li>
+                    <li><strong>Løkken stopper ikke:</strong> Hvis du bruker "gjenta for alltid", må du stoppe programmet manuelt eller legge til en "stopp hvis"-betingelse</li>
+                    <li><strong>Motoren roterer feil vei:</strong> Bruk negativ hastighet (-50%) for å rotere motsatt vei</li>
+                    <li><strong>Programmet virker ikke:</strong> Test hver del for seg. Kommenter ut kode eller lag små test-programmer</li>
+                    <li><strong>Verdier er rare:</strong> Bruk "Vis på hub" for å debugge - vis variabelverdier eller sensordatad for å se hva som skjer</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📖 Ressurser</h2>
+            <a href="https://education.lego.com/en-us/lessons/spikeessential-amazing-amusement-park/spikeessential-the-spinning-ferris-wheel/" class="resource-link" target="_blank">🌐 Original LEGO-leksjon</a>
+            <a href="/samling_2/samling_2.html" class="resource-link">🎡 Tilbake til Del 1 (Bygging)</a>
+        </div>
+
+        <div class="success">
+            <strong>🎉 Gratulerer!</strong> Du har nå lært grunnleggende programmering med sekvenser, løkker, sensorer og betingelser. Dette er byggesteinene i all robotikk og programmering!
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Teknologilab | <a href="/" style="color: white; text-decoration: none;">Tilbake til forsiden</a></p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
