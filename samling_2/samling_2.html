@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pariserhjul - LEGO Spike Prime - Teknologilab</title>
+    <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text: #333;
+            --border: #2c3e50;
+            --header-bg: #0e0e10;
+            --code-bg: #f5f5f5;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text: #e0e0e0;
+            --border: #4a90e2;
+            --code-bg: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .image-container img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin: 2.5rem 0;
+        }
+
+        .section h2 {
+            margin-bottom: 1rem;
+            color: var(--border);
+        }
+
+        .section h3 {
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .steps ol, .steps ul {
+            margin: 1rem 0 0 1.5rem;
+        }
+
+        .steps li {
+            margin: 0.5rem 0;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--border);
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: var(--border);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: transform 0.2s;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .warning {
+            background: #3a3a2a;
+            color: #e0d090;
+            border-left-color: #b8860b;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                height: 180px;
+                padding: 1rem;
+            }
+
+            .image-container img {
+                max-width: 400px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .theme-toggle {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+        <div class="image-container">
+            <a href="/index.html"><img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>🎡 Bygg et Pariserhjul med LEGO Spike Prime</h2>
+            <p>I denne økten skal vi bygge et roterende pariserhjul som styres med sensorer og motor. Dette er et populært prosjekt som kombinerer mekanikk og programmering.</p>
+            <img src="/samling_2/pariserhjul.png" alt="Pariserhjul eksempel" style="width:100%; max-width:600px; border-radius:8px; margin-top:1rem;">
+        </div>
+
+        <div class="section">
+            <h2>📦 Utstyr du trenger</h2>
+            <div class="info-box">
+                <ul>
+                    <li>LEGO Education SPIKE Prime sett</li>
+                    <li>iPad eller datamaskin med SPIKE™ appen installert</li>
+                    <li>Ladet hub (den oransje boksen)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Byggeinstruksjoner</h2>
+            <p>Denne leksjonen er basert på LEGO Educations offisielle undervisningsopplegg "The Spinning Ferris Wheel" fra SPIKE™ Essential-serien.</p>
+            
+            <div class="info-box">
+                <h3>Slik kommer du i gang:</h3>
+                <ol>
+                    <li>Åpne SPIKE™ appen på din iPad eller datamaskin</li>
+                    <li>Finn leksjonen "The Spinning Ferris Wheel" under "Amazing Amusement Park" enheten</li>
+                    <li>Følg byggeinstruksjonene i appen steg-for-steg</li>
+                    <li>Last ned PDF-instruksjonene nedenfor hvis du foretrekker å ha en utskrift</li>
+                </ol>
+
+                <a href="https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt0d2abaf129110763/5f572fa927a6ca5b5b1a6e45/U2L6.pdf" class="resource-link" target="_blank">📄 Last ned byggeinstruksjon (PDF)</a>
+                <a href="https://education.lego.com/en-us/lessons/spikeessential-amazing-amusement-park/spikeessential-the-spinning-ferris-wheel/" class="resource-link" target="_blank">🌐 Se leksjonen på LEGO Education</a>
+            </div>
+
+            <div class="warning">
+                <strong>💡 Tips:</strong> Leksjonen bruker SPIKE Essential-settet, men prinsippene fungerer også med SPIKE Prime. Du kan bygge ditt eget design hvis du ønsker - prinsippet er enkelt: ett stort hjul med gondoler som roterer rundt en akse drevet av en motor.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎮 Programmering - LEGO Education Opplegg</h2>
+            
+            <p>LEGO Education sin leksjon har tre utfordringer som bygger på hverandre:</p>
+
+            <div class="info-box">
+                <h3>Utfordring 1: Start Pariserhjulet</h3>
+                <p>Lag et program som får pariserhjulet til å rotere.</p>
+                <div class="code-block">
+Når programmet starter
+  Start motor
+            </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Utfordring 2: Gjør pariserhjulet bedre</h3>
+                <p>Endre programmet slik at pariserhjulet stopper etter en kvart omdreining, slik at teamet kan gå av og på.</p>
+                <div class="code-block">
+Når programmet starter
+  Roter motor 90 grader
+  Vent 2 sekunder
+  (Gjenta hvis du vil ha flere stopp)
+            </div>
+                <p><strong>Viktig tips:</strong> Du må legge til en "Vent"-blokk for at pariserhjulet skal stoppe lenge nok til at teamet kan komme av og på!</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Utfordring 3: Oppgrader pariserhjulet</h3>
+                <p>Gjør pariserhjulet enda kulere! Her er noen forslag fra LEGO Education:</p>
+                <ul>
+                    <li>Legg til lyd som spilles når pariserhjulet starter</li>
+                    <li>Få lyset på hubben til å blinke som en nedtelling før start</li>
+                    <li>Bygg flere gondoler eller gjør hjulet større</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Ekstra programmeringsideer</h2>
+            
+            <h3>Kontinuerlig rotasjon med stopp</h3>
+            <p>La pariserhjulet rotere kontinuerlig og stoppe ved hver gondol:</p>
+            <div class="code-block">
+Når programmet starter
+  Gjenta for alltid:
+    Roter motor 90 grader
+    Vent 3 sekunder
+            </div>
+
+            <h3>Bruk av sensorer (SPIKE Prime)</h3>
+            <p>Hvis du har SPIKE Prime med ekstra sensorer:</p>
+            <div class="code-block">
+Når programmet starter
+  Vent til kraftsensor trykkes
+  Start motor med hastighet 30%
+  Når avstandssensor < 10 cm:
+    Vis ikon på hub
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Utfordringer og utvidelser</h2>
+            <div class="info-box steps">
+                <h3>LEGO Education Utfordringer:</h3>
+                <ol>
+                    <li><strong>Start pariserhjulet</strong> - Få det til å rotere</li>
+                    <li><strong>Forbedre pariserhjulet</strong> - Få det til å stoppe for av- og påstigning</li>
+                    <li><strong>Oppgrader pariserhjulet</strong> - Legg til lys, lyd eller bygg større</li>
+                </ol>
+
+                <h3>Ekstra utfordringer:</h3>
+                <ol>
+                    <li><strong>Telleverk:</strong> Tell hvor mange passasjerer som har tatt turen</li>
+                    <li><strong>Nedtelling:</strong> Få lyset på hubben til å blinke før start</li>
+                    <li><strong>Automatisk stopp:</strong> Programmer pariserhjulet til å stoppe etter et visst antall omdreininger</li>
+                </ol>
+            </div>
+
+            <div class="warning">
+                <strong>Matematikk-utvidelse:</strong> Del pariserhjulet inn i like eller ulike deler. Hvor mange grader er det mellom hver gondol? Lag en tegning som viser vinklene.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Nyttige konsepter</h2>
+            <div class="info-box">
+                <h3>Motorkontroll</h3>
+                <ul>
+                    <li><strong>Grader:</strong> 360 grader = 1 full omdreining</li>
+                    <li><strong>Hastighet:</strong> 0-100% (negative verdier roterer motsatt vei)</li>
+                    <li><strong>Posisjon:</strong> Motorens nåværende vinkel i grader</li>
+                </ul>
+
+                <h3>Sensorer</h3>
+                <ul>
+                    <li><strong>Kraftsensor:</strong> Detekterer trykk (0-100%)</li>
+                    <li><strong>Avstandssensor:</strong> Måler avstand i cm (0-200 cm)</li>
+                    <li><strong>Fargesensor:</strong> Kan brukes til å detektere fargede gondoler</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>❓ Vanlige problemer og løsninger</h2>
+            <div class="info-box steps">
+                <ul>
+                    <li><strong>Pariserhjulet roterer ikke:</strong> Sjekk at motorkabelen sitter i riktig port og at hub er ladet</li>
+                    <li><strong>Rotasjonen er hakkete:</strong> Reduser hastigheten eller sjekk om det er friksjon i konstruksjonen</li>
+                    <li><strong>Sensor reagerer ikke:</strong> Test sensoren i SPIKE™ appen for å se om den fungerer</li>
+                    <li><strong>Konstruksjonen faller fra hverandre:</strong> Forsterke med ekstra brikker eller bruk technic-pins</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Husk:</strong> Pariserhjulet kan bli tungt når du legger til mange gondoler. Du kan trenge å øke motorhastigheten eller redusere vekten på gondolene.
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Teknologilab | <a href="/" style="color: white; text-decoration: none;">Tilbake til forsiden</a></p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
