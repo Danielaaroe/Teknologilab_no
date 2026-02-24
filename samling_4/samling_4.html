@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Delivery Challenge - Teknologilab</title>
+    <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text: #333;
+            --border: #2c3e50;
+            --header-bg: #0e0e10;
+            --code-bg: #f5f5f5;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text: #e0e0e0;
+            --border: #4a90e2;
+            --code-bg: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover { background: rgba(255, 255, 255, 0.2); }
+
+        .image-container {
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .image-container img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section { margin: 2.5rem 0; }
+
+        .section h2 { margin-bottom: 1rem; color: var(--border); }
+        .section h3 { margin: 1.5rem 0 0.75rem 0; }
+        .section p { margin-bottom: 1rem; }
+
+        .info-box {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .steps ol, .steps ul { margin: 1rem 0 0 1.5rem; }
+        .steps li { margin: 0.5rem 0; }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--border);
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: var(--border);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: transform 0.2s;
+        }
+
+        .resource-link:hover { transform: translateY(-2px); }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .warning {
+            background: #3a3a2a;
+            color: #e0d090;
+            border-left-color: #b8860b;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .success {
+            background: #2a3a2a;
+            color: #90e0a0;
+            border-left-color: #28a745;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .image-container { height: 180px; padding: 1rem; }
+            .image-container img { max-width: 400px; }
+            .container { padding: 1rem; }
+            .theme-toggle { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+        <div class="image-container">
+            <a href="/index.html"><img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo"></a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>🏁 Robot Delivery Challenge</h2>
+            <p>Bygg en liten robotbil som kjører autonomt og <strong>skyver en “pakke”</strong> inn i en mål-sone. Til slutt kjører vi konkurranse med poeng og flere forsøk.</p>
+
+            <div class="success">
+                <strong>👥 Team-oppsett:</strong> 3 barn + 1 voksen per lag. <br>
+                <strong>⏱️ Varighet:</strong> 2 økter × 2 timer (kan også kjøres som én lang økt).
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Læringsmål</h2>
+            <div class="info-box">
+                <ul>
+                    <li>Bygge en enkel robotbil med pusher/scoop</li>
+                    <li>Programmere <strong>sekvens</strong> (start → kjør → stopp)</li>
+                    <li>Justere tid/hastighet for presisjon</li>
+                    <li>(Valgfritt) bruke sensor for stopp/treff</li>
+                    <li>Måling og iterasjon: test → endre → test</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧰 Utstyr</h2>
+            <div class="info-box steps">
+                <ul>
+                    <li>Robotbil-kit (micro:bit buggy / Arduino bil / LEGO SPIKE / lignende)</li>
+                    <li>Teip til bane på gulv + målebånd/linjal</li>
+                    <li>“Pakke”: liten skumkloss/trekloss (lett å skyve)</li>
+                    <li>Front “pusher”: papp + teip + evt. strips</li>
+                    <li>(Valgfritt) avstandssensor/linjesensor for hard-modus</li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <strong>Tips:</strong> Hold det “lavterskel”: pusher foran gjør at alle får en fungerende robot uten komplisert mekanikk.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Baneoppsett</h2>
+            <div class="info-box steps">
+                <ul>
+                    <li>Lag en rett “kjørefil” med teip (ca. 2–3 meter)</li>
+                    <li>Marker <strong>Start</strong></li>
+                    <li>Plasser <strong>pakke</strong> på fast punkt (f.eks. 60 cm fra start)</li>
+                    <li>Marker <strong>Mål-sone</strong> med 3 nivåer:
+                        <ul>
+                            <li>Bronse (stor)</li>
+                            <li>Sølv (mellom)</li>
+                            <li>Gull (liten i midten)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✅ Oppdraget</h2>
+            <div class="info-box">
+                <h3>Robot skal:</h3>
+                <ul>
+                    <li>Starte fra start-linje</li>
+                    <li>Kjøre frem til pakken</li>
+                    <li>Skyve pakken inn i mål-sonen</li>
+                    <li>Stoppe</li>
+                </ul>
+            </div>
+
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3>Enkel modus (anbefalt)</h3>
+                    <ul>
+                        <li>Kjør frem i X millisekunder</li>
+                        <li>Stopp</li>
+                        <li>(Valgfritt) liten sving + kjør + stopp</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Hard modus (valgfritt)</h3>
+                    <ul>
+                        <li>Bruk sensor: stopp når avstand &lt; terskel</li>
+                        <li>Evt. linjefølger til stopp-linje</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏆 Poeng og konkurranse</h2>
+            <div class="info-box steps">
+                <ul>
+                    <li>Pakken i hvilken som helst mål-sone: <strong>3 poeng</strong></li>
+                    <li>Pakken i sølv: <strong>+1</strong></li>
+                    <li>Pakken i gull (midt): <strong>+2</strong></li>
+                    <li>Raskeste <em>vellykkede</em> runde (minimum 3 poeng): <strong>+1</strong></li>
+                    <li>Pålitelighet: 2 vellykkede runder på rad: <strong>+1</strong></li>
+                </ul>
+                <p><strong>Hvert lag får 3 forsøk.</strong> Beste poengsum teller.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🕒 Øktplan (2 × 2 timer)</h2>
+
+            <div class="info-box">
+                <h3>Økt 1: Bygg + første autonome kjøring</h3>
+                <div class="code-block">0:00–0:10  Introduksjon + demo
+0:10–0:45  Bygg bil (chassis + hjul + motor)
+0:45–1:10  Lag pusher/scoop (papp + teip)
+1:10–1:35  Første program: kjør frem → stopp
+1:35–1:55  Test på bane (få pakken til å flytte seg)
+1:55–2:00  Mini-demo: alle lag viser én kjøring</div>
+                <p><strong>Mål:</strong> Alle lag har bil som kjører og kan skyve pakken.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Økt 2: Tuning + konkurranse</h3>
+                <div class="code-block">0:00–0:10  Regler + poeng
+0:10–0:50  Tuning (tid/hastighet/sving)
+0:50–1:30  Kvalifisering (2 forsøk per lag)
+1:30–1:55  Finaler/beste forsøk + tie-break (raskeste vellykkede)
+1:55–2:00  Oppsummering + premier</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧩 Startprogram (plattform-uavhengig pseudokode)</h2>
+            <div class="info-box">
+                <p>Oversett til MakeCode / Arduino / SPIKE / Scratch-blocks.</p>
+                <div class="code-block">Når programmet starter:
+  Sett motorhastighet = 50%
+  Kjør fremover i 1200 ms
+  Stopp
+  Vent 500 ms</div>
+                <p><strong>Utvidelse:</strong> legg til en liten sving før siste fremkjøring.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>❓ Feilsøking</h2>
+            <div class="info-box steps">
+                <ul>
+                    <li><strong>Kjører skjevt:</strong> senk hastighet og øk kjøretid litt; sjekk hjul sitter rett</li>
+                    <li><strong>Skyver ikke pakken:</strong> senk pusher nærmere gulvet; bruk lettere kloss</li>
+                    <li><strong>For langt/kort:</strong> juster millisekunder (små endringer, f.eks. ±100 ms)</li>
+                    <li><strong>Stopper ikke:</strong> sørg for “stopp motor” i slutten</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📖 Ressurser</h2>
+            <a href="/index.html" class="resource-link">🏠 Tilbake til forsiden</a>
+        </div>
+
+        <div class="success">
+            <strong>✅ Klar til konkurranse:</strong> Når alle lag får 3 poeng minst én gang, kan dere starte finaler.
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Teknologilab | <a href="/" style="color: white; text-decoration: none;">Tilbake til forsiden</a></p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
