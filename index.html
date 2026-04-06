@@ -80,7 +80,6 @@
             transition: all 0.3s;
             z-index: 10;
         }
-
         .theme-toggle:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
@@ -88,19 +87,39 @@
 
         .image-container {
             width: 100%;
-            height: 290px;
+            height: 220px;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 2rem 2rem 1rem;
         }
-
         .image-container img {
             max-width: 600px;
             width: 100%;
             height: auto;
             object-fit: contain;
+        }
+
+        .samlinger-banner {
+            display: block;
+            background: linear-gradient(135deg, #2980b9 0%, #1a5276 100%);
+            color: white;
+            text-align: center;
+            padding: 1.1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            transition: background 0.2s, letter-spacing 0.2s;
+        }
+        .samlinger-banner:hover {
+            background: linear-gradient(135deg, #3498db 0%, #2471a3 100%);
+            letter-spacing: 0.04em;
+        }
+        .samlinger-banner span {
+            margin-left: 0.5rem;
+            font-size: 1.3rem;
         }
 
         .container {
@@ -116,7 +135,6 @@
             margin: 2rem 0;
             border-radius: 4px;
         }
-
         .info-box h2 {
             color: var(--border-color);
             margin-bottom: 1rem;
@@ -130,7 +148,6 @@
             border-radius: 4px;
             color: var(--success-text);
         }
-
         .success-box h2 {
             color: var(--success-border);
             margin-bottom: 1rem;
@@ -144,7 +161,6 @@
             border-radius: 4px;
             color: var(--warning-text);
         }
-
         .warning-box h2 {
             color: var(--warning-border);
             margin-bottom: 0.5rem;
@@ -153,24 +169,17 @@
         .section {
             margin: 2.5rem 0;
         }
-
         .section h2 {
             color: var(--text-primary);
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
-
-        .section p {
-            margin-bottom: 1rem;
-        }
+        .section p { margin-bottom: 1rem; }
 
         ul {
             margin: 1rem 0 1rem 2rem;
         }
-
-        ul li {
-            margin: 0.5rem 0;
-        }
+        ul li { margin: 0.5rem 0; }
 
         .details {
             display: grid;
@@ -186,11 +195,7 @@
             box-shadow: 0 2px 8px var(--shadow);
             transition: transform 0.3s ease;
         }
-
-        .detail-card:hover {
-            transform: translateY(-5px);
-        }
-
+        .detail-card:hover { transform: translateY(-5px); }
         .detail-card h3 {
             color: var(--border-color);
             margin-bottom: 0.5rem;
@@ -202,7 +207,6 @@
             gap: 1rem;
             margin-top: 1rem;
         }
-
         .activity-item {
             background: linear-gradient(135deg, var(--activity-bg-1) 0%, var(--activity-bg-2) 100%);
             color: white;
@@ -221,25 +225,11 @@
         }
 
         @media (max-width: 768px) {
-            .image-container {
-                height: 180px;
-                padding: 1rem;
-            }
-
-            .image-container img {
-                max-width: 400px;
-            }
-
-            .theme-toggle {
-                top: 0.5rem;
-                right: 0.5rem;
-                padding: 0.4rem 0.8rem;
-                font-size: 0.9rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
+            .image-container { height: 160px; padding: 1rem 1rem 0.5rem; }
+            .image-container img { max-width: 400px; }
+            .samlinger-banner { font-size: 1.05rem; padding: 1rem; }
+            .theme-toggle { top: 0.5rem; right: 0.5rem; padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+            .container { padding: 1rem; }
         }
     </style>
 </head>
@@ -250,35 +240,33 @@
         <div class="image-container">
             <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo">
         </div>
+        <a class="samlinger-banner" href="/samlinger.html">
+            📅 Se alle samlinger og oppgaver <span>→</span>
+        </a>
     </header>
 
     <div class="container">
-        
-        <div class="success-box">
-            <h2>🤩Første opptak er nå gjennomført🤩</h2>
-            <p>
-                Alle påmeldte har fått en epost med info 📧
-            </p>
+
+        <div class="section">
+            <h2>Velkommen til Teknologilab – Blindheim Barneskole</h2>
+            <p>Teknologilab er et frivillig tilbud for elever som ønsker å utforske teknologi, programmering og kreativ problemløsning. Vi møtes hver uke og jobber med spennende prosjekter i et rolig og konsentrert miljø.</p>
         </div>
 
         <div class="section">
-            <h2>Hva skal vi jobbe med? Spesifikke samlinger <a href="/samlinger.html">her</a> </h2>
-            <p>Gjennom året vil vi jobbe med:</p>
+            <h2>Hva jobber vi med?</h2>
+            <p>Gjennom året jobber vi med ulike teknologiprosjekter tilpasset aldersgruppen. Her er et utvalg av hva vi har på programmet:</p>
             <div class="activity-grid">
-                <div class="activity-item">🤖 LEGO Spike</div>
-                <div class="activity-item">💻 Programmering</div>
-                <div class="activity-item">🧱 Bygging og konstruksjon</div>
-                <div class="activity-item">🔬 Kreative teknologiprosjekter</div>
+                <div class="activity-item">🤖 LEGO Spike<br><small>Robotbygging og programmering</small></div>
+                <div class="activity-item">⛏️ Minecraft Education<br><small>Kode og bygging i Minecraft</small></div>
+                <div class="activity-item">💻 Blokkprogrammering<br><small>MakeCode og Scratch</small></div>
+                <div class="activity-item">🔬 Teknologiprosjekter<br><small>Konstruksjon og kreativitet</small></div>
             </div>
-            <p style="margin-top: 1.5rem;">Målet er at barna både skal lære nye ferdigheter, utforske teknologi på en
-                trygg og morsom måte, og samtidig bygge et lag som ønsker å delta i <strong>LEGO First League til
-                    høsten</strong>.</p>
+            <p style="margin-top: 1.5rem;">Målet er at barna skal lære nye ferdigheter, utforske teknologi på en trygg og morsom måte, og bygge et lag som kan delta i <strong>LEGO First League til høsten</strong>.</p>
         </div>
 
         <div class="section">
             <h2>Hvem passer Teknologilaben for?</h2>
-            <p>Vi ønsker en gruppe med varierte interesser og ferdigheter – både nybegynnere og de som allerede kan
-                litt. Det viktigste er at deltakerne:</p>
+            <p>Vi ønsker en gruppe med varierte interesser og ferdigheter – både nybegynnere og de som allerede kan litt. Det viktigste er at deltakerne:</p>
             <ul>
                 <li>er motiverte og har lyst til å lære</li>
                 <li>ønsker å samarbeide og bidra positivt</li>
@@ -289,10 +277,8 @@
 
         <div class="warning-box">
             <h2>⚠️ Viktig å vite</h2>
-            <p>For å sikre et godt miljø må vi understreke at Teknologilab må være en rolig arena som krever
-                konsentrasjon av den enkelte. Noe foregår i plenum og noe i mindre grupper.</p>
-            <p style="margin-top: 0.5rem;">Vi holder til i resepsjonsområdet på skolen, så det kan fort bli mye lyd av
-                en større gruppe. Vi følger et læringsprogram så det er viktig med stabil tilstedeværelse.</p>
+            <p>Teknologilab er en rolig arena som krever konsentrasjon av den enkelte. Noe foregår i plenum og noe i mindre grupper.</p>
+            <p style="margin-top: 0.5rem;">Vi holder til i resepsjonsområdet på skolen, og vi følger et læringsprogram – det er derfor viktig med stabil tilstedeværelse.</p>
         </div>
 
         <div class="section">
@@ -302,22 +288,8 @@
                 <li>organisering og støtte til barna</li>
                 <li>hjelp under øktene</li>
                 <li>prosjektledelse</li>
-                <li>grunnleggende kompetanse/interesse innen programmering eller teknologi (ikke et krav, men en fordel)
-                </li>
+                <li>grunnleggende kompetanse/interesse innen programmering eller teknologi (ikke et krav, men en fordel)</li>
             </ul>
-            <p>Foreldre som ønsker å bidra, kan melde sin interesse i påmeldingen.</p>
-        </div>
-
-        <div class="section">
-            <h2>Antall plasser og forbehold</h2>
-            <p>Vi har et begrenset antall plasser og må derfor ta forbehold om:</p>
-            <ul>
-                <li>hvor mange barn vi kan ta inn</li>
-                <li>at vi har nok voksne til stede</li>
-                <li>at deltakerne viser motivasjon og samarbeidsevne</li>
-            </ul>
-            <p>Dette tilbudet drives av frivillige foreldre og får vi flere barn enn vi kan håndtere vil det bli satt
-                opp en venteliste, eller deles opp i annenhver uke.</p>
         </div>
 
         <div class="details">
@@ -325,17 +297,14 @@
                 <h3>📍 Sted</h3>
                 <p>Resepsjonsområdet på skolen<br>Inngang ved gymsal</p>
             </div>
-
             <div class="detail-card">
                 <h3>🕐 Tid</h3>
-                <p>Tirsdag<br>17:00 - 19:00</p>
+                <p>Tirsdag<br>17:00 – 19:00</p>
             </div>
-
             <div class="detail-card">
-                <h3>💻</h3>
-                <p>Vi bruker skolens utstyr. <br> Barna må bruke sitt eget læringsbrett! </p>
+                <h3>💻 Utstyr</h3>
+                <p>Vi bruker skolens utstyr.<br>Barna må bruke sitt eget læringsbrett!</p>
             </div>
-
             <div class="detail-card">
                 <h3>👥 Hvem</h3>
                 <p>Elever i <strong>6. klasse</strong></p>
@@ -343,15 +312,16 @@
         </div>
 
         <div class="info-box">
-            <h2>Påmelding</h2>
-            <p>Kontakt oss for påmelding og mer informasjon.</p>
-            <p style="margin-top: 1rem;">Har du spørsmål? Ta gjerne kontakt!</p>
+            <h2>Spørsmål?</h2>
+            <p>Har du spørsmål om tilbudet kan du ta kontakt med <strong>Daniel Aarø</strong> eller <strong>Gunnar Kjemphol</strong>.</p>
+            <p style="margin-top: 1rem;">Mer informasjon om samlinger og oppgaver finner du på <a href="/samlinger.html">samlingssiden</a>.</p>
         </div>
+
     </div>
 
     <footer>
-        <p>Teknologilab - Blindheim Barneskole</p>
-        <p>Tirsdag 17:00-19:00 | Resepsjonsområdet, inngang ved gymsal</p>
+        <p>Teknologilab – Blindheim Barneskole</p>
+        <p>Tirsdag 17:00–19:00 | Resepsjonsområdet, inngang ved gymsal</p>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Drevet av frivillige foreldre</p>
     </footer>
 
@@ -363,10 +333,8 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         }
-
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
     </script>
 </body>
-
 </html>
