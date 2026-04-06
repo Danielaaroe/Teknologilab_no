@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPIKE: Stripe + Hent sylinder - Teknologilab</title>
+  <title>Minecraft Education: Kode og Bygging - Teknologilab</title>
   <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,6 +15,12 @@
       --border: #2c3e50;
       --header-bg: #0e0e10;
       --code-bg: #f5f5f5;
+      --accent: #5b8a3c;
+      --accent2: #8b6914;
+      --grass: #5b8a3c;
+      --dirt: #8b6914;
+      --stone: #7a7a7a;
+      --diamond: #1ab3c4;
     }
     [data-theme="dark"] {
       --bg: #1a1a1a;
@@ -22,6 +28,8 @@
       --text: #e0e0e0;
       --border: #4a90e2;
       --code-bg: #1e1e1e;
+      --accent: #7ec850;
+      --accent2: #c8a44a;
     }
 
     body {
@@ -43,15 +51,15 @@
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.3s;
     }
-    .theme-toggle:hover { background: rgba(255, 255, 255, 0.2); }
+    .theme-toggle:hover { background: rgba(255,255,255,0.2); }
 
     .image-container {
       width: 100%;
@@ -100,6 +108,7 @@
       font-family: 'Courier New', monospace;
       overflow-x: auto;
       white-space: pre;
+      font-size: 0.92em;
     }
 
     .warning {
@@ -140,10 +149,164 @@
       padding: 0.75rem;
       text-align: left;
     }
-    [data-theme="dark"] th, 
+    [data-theme="dark"] th,
     [data-theme="dark"] td {
       border-color: rgba(255,255,255,0.2);
     }
+
+    /* Minecraft-style task cards */
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .task-card {
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .task-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .task-card-header {
+      padding: 1rem 1.2rem 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .task-card-header .icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .task-card-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--border);
+    }
+    .task-card-body {
+      padding: 0.5rem 1.2rem 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .easy { background: #d4edda; color: #155724; }
+    .medium { background: #fff3cd; color: #856404; }
+    .hard { background: #f8d7da; color: #721c24; }
+    [data-theme="dark"] .easy { background: #1e3a22; color: #7fcc90; }
+    [data-theme="dark"] .medium { background: #3a3318; color: #ccb055; }
+    [data-theme="dark"] .hard { background: #3a1a1a; color: #cc7070; }
+
+    /* Minecraft block visual for coordinate explanation */
+    .coord-diagram {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .mc-block {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-radius: 3px;
+      font-size: 0.65rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .video-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: var(--text);
+      margin: 0.5rem 0;
+      transition: background 0.2s;
+    }
+    .video-link:hover { background: #e8f4fd; }
+    [data-theme="dark"] .video-link:hover { background: #2a3a4a; }
+    .video-link .yt-icon {
+      background: #ff0000;
+      color: white;
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.85rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .video-link .vid-title { font-weight: 500; font-size: 0.95rem; }
+    .video-link .vid-meta { font-size: 0.8rem; opacity: 0.6; }
+
+    .task-detail {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+    .task-detail-header {
+      background: var(--border);
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .task-detail-body {
+      padding: 1.5rem;
+    }
+
+    .step-list { counter-reset: steps; list-style: none; margin: 1rem 0; }
+    .step-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 1rem;
+      margin: 0.75rem 0;
+      align-items: flex-start;
+    }
+    .step-list li::before {
+      content: counter(steps);
+      background: var(--border);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .coord-table td:first-child { font-weight: bold; font-family: monospace; }
+    .x-axis { color: #e74c3c; }
+    .y-axis { color: #27ae60; }
+    .z-axis { color: #2980b9; }
 
     footer {
       background: #333;
@@ -158,10 +321,465 @@
       .image-container img { max-width: 400px; }
       .container { padding: 1rem; }
       .theme-toggle { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+      .task-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-<li><a href="https://www.fllcasts.com/materials/1246-luly-small-lego-education-spike-prime-competition-robot">Luly Small LEGO Education SPIKE Prime Competition Robot</a></li>
+  <header>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+    <div class="image-container">
+      <a href="/index.html">
+        <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo" />
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="section">
+      <h2>⛏️ Minecraft Education: Kode og Bygging</h2>
+      <p>Lær å programmere i Minecraft Education Edition! Vi bruker <strong>MakeCode (blokkprogrammering)</strong> til å bygge strukturer, kontrollere agenten og utforske koordinatsystemet – alt inne i Minecraft.</p>
+      <div class="success">
+        <strong>Hva trenger du?</strong> Minecraft Education Edition (skolelisens), PC eller iPad, og en Microsoft/skole-konto. Ingen ekstra installasjon nødvendig.
+      </div>
+    </div>
+
+    <!-- LEARNING GOALS -->
+    <div class="section">
+      <h2>🎯 Læringsmål</h2>
+      <div class="info-box">
+        <ul>
+          <li>Forstå koordinatsystemet i Minecraft (X, Y, Z)</li>
+          <li>Bruke MakeCode-agenten til å bygge automatisk</li>
+          <li>Lage løkker og betingelser i blokkprogrammering</li>
+          <li>Bygge enkle og mer komplekse strukturer med kode</li>
+          <li>Forstå sammenhengen mellom kode og det som skjer i spillet</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- COORDINATE SYSTEM -->
+    <div class="section">
+      <h2>🗺️ Koordinatsystemet i Minecraft</h2>
+      <p>Minecraft bruker tre akser for å beskrive posisjoner i verden. Disse kalles X, Y og Z.</p>
+
+      <div class="info-box">
+        <table class="coord-table">
+          <thead>
+            <tr><th>Akse</th><th>Retning</th><th>Eksempel</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="x-axis">X (Øst/Vest)</td>
+              <td>Øst = høyere X, Vest = lavere X</td>
+              <td>X: 100 er lenger øst enn X: 50</td>
+            </tr>
+            <tr>
+              <td class="y-axis">Y (Opp/Ned)</td>
+              <td>Opp = høyere Y, ned = lavere Y</td>
+              <td>Havnivå = Y: 64, grotte = Y: 20</td>
+            </tr>
+            <tr>
+              <td class="z-axis">Z (Nord/Sør)</td>
+              <td>Sør = høyere Z, Nord = lavere Z</td>
+              <td>Z: 200 er lenger sør enn Z: 100</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>💡 Tips:</strong> Trykk <strong>F3</strong> (PC) i spillet for å se koordinatene dine øverst til venstre. Prøv å gå i forskjellige retninger og se hva som endrer seg!
+      </div>
+
+      <a class="video-link" href="https://www.youtube.com/watch?v=4otE0kYJAi0" target="_blank">
+        <span class="yt-icon">▶ YouTube</span>
+        <div>
+          <div class="vid-title">Minecraft Coordinate System Explained</div>
+          <div class="vid-meta">Enkel forklaring av X, Y, Z – god intro for nybegynnere</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- AGENT INTRO -->
+    <div class="section">
+      <h2>🤖 Hva er Agenten?</h2>
+      <p>I Minecraft Education har du en hjelper som heter <strong>Agenten</strong>. Agenten kan du programmere til å gjøre ting for deg – gå, bygge, grave og plante. Tenk på agenten som en robot du styrer med kode.</p>
+
+      <div class="info-box">
+        <strong>Slik åpner du MakeCode:</strong>
+        <ol style="margin: 0.5rem 0 0 1.5rem;">
+          <li>Åpne chat i Minecraft (T-tasten)</li>
+          <li>Skriv <code style="background:var(--code-bg);padding:0.1rem 0.4rem;border-radius:3px;">/code</code> og trykk Enter</li>
+          <li>Velg «MakeCode» – nettleserprogrammeringen åpner seg</li>
+          <li>Dra og slipp blokker for å lage programmer</li>
+          <li>Trykk «Spill» for å kjøre koden</li>
+        </ol>
+      </div>
+
+      <a class="video-link" href="https://www.youtube.com/watch?v=3fVDI0cwSqw" target="_blank">
+        <span class="yt-icon">▶ YouTube</span>
+        <div>
+          <div class="vid-title">Getting Started with Minecraft Education + MakeCode</div>
+          <div class="vid-meta">Offisiell intro – åpne MakeCode og bruk agenten første gang</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- TASK OVERVIEW -->
+    <div class="section">
+      <h2>📋 Oppgaveoversikt</h2>
+      <div class="task-grid">
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">🚶</span>
+            <h3>Oppgave 1: Agenten går</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge easy">Enkel</span>
+            <p>Få agenten til å gå fremover, bakover og til siden. Lær grunnleggende kommandoer.</p>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">📦</span>
+            <h3>Oppgave 2: Legg en rad blokker</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge easy">Enkel</span>
+            <p>Bruk agenten til å plassere en rad med blokker ved hjelp av en løkke.</p>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">⬛</span>
+            <h3>Oppgave 3: Bygg et gulv</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge easy">Enkel</span>
+            <p>Bruk dobbel løkke til å bygge et flatt gulv (5×5 blokker).</p>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">🧱</span>
+            <h3>Oppgave 4: Bygg en vegg</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge medium">Middels</span>
+            <p>Bygg en vegg med høyde og bredde. Kombiner bevegelse og plassering.</p>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">🏠</span>
+            <h3>Oppgave 5: Bygg et hus</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge medium">Middels</span>
+            <p>Bygg fire vegger og ett tak. Legg til dør og vindu med <code>fill</code>-kommandoen.</p>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">🌀</span>
+            <h3>Oppgave 6: Spiraltårn</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge hard">Avansert</span>
+            <p>Bygg et tårn der agenten går i spiral oppover. Krever god forståelse av løkker og retning.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TASK 1 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">🚶</span>
+        <div>
+          <strong>Oppgave 1: Agenten går</strong>
+          <span class="difficulty-badge easy" style="margin-left:0.75rem">Enkel</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Målet er å få agenten til å gå rundt i verden – og forstå hva som skjer med koordinatene når den beveger seg.</p>
+
+        <h3>Hva du skal gjøre</h3>
+        <ol class="step-list">
+          <li>Åpne MakeCode med <code>/code</code> i chatten</li>
+          <li>Finn blokken <strong>«agent move forward by 1»</strong> under «Agent»-menyen</li>
+          <li>Legg den inn i <strong>«on start»</strong>-blokken og kjør programmet</li>
+          <li>Legg til <strong>«agent turn left»</strong> og <strong>«agent move forward»</strong> igjen – hva skjer?</li>
+          <li>Prøv å lage et program som får agenten til å gå en firkant (frem, venstre ×4)</li>
+        </ol>
+
+        <div class="code-block">// Pseudokode for firkant:
+gjenta 4 ganger:
+    agent gå fremover 5
+    agent snu til venstre</div>
+
+        <div class="success"><strong>Utfordring:</strong> Sjekk F3-koordinatene før og etter agenten går. Hvilken akse endret seg?</div>
+      </div>
+    </div>
+
+    <!-- TASK 2 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">📦</span>
+        <div>
+          <strong>Oppgave 2: Legg en rad blokker</strong>
+          <span class="difficulty-badge easy" style="margin-left:0.75rem">Enkel</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Agenten kan plassere blokker mens den går. Vi bruker en <strong>løkke</strong> for å gjenta handlingen automatisk.</p>
+
+        <h3>Forberedelse</h3>
+        <div class="steps">
+          <ul>
+            <li>Gi agenten blokker: høyreklikk på agenten → legg stein i slot 1</li>
+            <li>Bruk blokken <strong>«agent place on move»</strong> for å plassere automatisk</li>
+          </ul>
+        </div>
+
+        <h3>Program (MakeCode-blokker)</h3>
+        <div class="code-block">gjenta 10 ganger:
+    agent gå fremover 1
+    agent plasser blokk fremover</div>
+
+        <div class="warning"><strong>OBS:</strong> Agenten må ha blokker i inventory – ellers skjer ingenting!</div>
+
+        <a class="video-link" href="https://www.youtube.com/watch?v=ckbGMFVhkxo" target="_blank">
+          <span class="yt-icon">▶ YouTube</span>
+          <div>
+            <div class="vid-title">Minecraft Education: Agent Place Blocks with a Loop</div>
+            <div class="vid-meta">Viser hvordan du bruker løkker til å bygge rader</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- TASK 3 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">⬛</span>
+        <div>
+          <strong>Oppgave 3: Bygg et gulv (5×5)</strong>
+          <span class="difficulty-badge easy" style="margin-left:0.75rem">Enkel</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Nå bruker vi en <strong>løkke inni en løkke</strong> (nestet løkke) for å bygge et flatt gulv.</p>
+
+        <div class="code-block">gjenta 5 ganger:          // 5 rader
+    gjenta 5 ganger:      // 5 blokker per rad
+        agent gå fremover 1
+        agent plasser blokk ned
+    agent snu høyre
+    agent gå fremover 1
+    agent snu venstre</div>
+
+        <div class="info-box">
+          <strong>Hva skjer her?</strong><br>
+          Den indre løkken bygger én rad. Den ytre løkken gjentar dette 5 ganger, og mellom hver rad beveger agenten seg ett steg til siden for å starte på ny rad.
+        </div>
+
+        <div class="success"><strong>Utfordring:</strong> Bytt ut stein med forskjellige blokker – kan du lage et sjakkmønster?</div>
+      </div>
+    </div>
+
+    <!-- TASK 4 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">🧱</span>
+        <div>
+          <strong>Oppgave 4: Bygg en vegg</strong>
+          <span class="difficulty-badge medium" style="margin-left:0.75rem">Middels</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Vi bygger en vegg som er 6 blokker bred og 4 blokker høy. Agenten bygger én kolonne, flyttes opp, bygger neste kolonne osv.</p>
+
+        <div class="code-block">gjenta 4 ganger:              // 4 etasjer
+    gjenta 6 ganger:          // 6 blokker bredt
+        agent gå fremover 1
+        agent plasser blokk fremover
+    agent gå opp 1
+    // Gå tilbake til start av rad
+    agent snu rundt
+    agent gå fremover 6
+    agent snu rundt</div>
+
+        <div class="warning"><strong>Hint:</strong> «Agent move up» finnes under Agent-blokker. Agenten kan bevege seg i alle seks retninger!</div>
+
+        <a class="video-link" href="https://www.youtube.com/watch?v=WNs3smXKzFs" target="_blank">
+          <span class="yt-icon">▶ YouTube</span>
+          <div>
+            <div class="vid-title">Building Walls with Agent – Minecraft Education</div>
+            <div class="vid-meta">Demonstrerer vegger og 3D-bevegelse med agenten</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- TASK 5 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">🏠</span>
+        <div>
+          <strong>Oppgave 5: Bygg et hus</strong>
+          <span class="difficulty-badge medium" style="margin-left:0.75rem">Middels</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Kombiner gulv, vegger og tak til et enkelt hus. Her bruker vi også <strong>«fill»-kommandoen</strong> for å fylle store volumer raskt.</p>
+
+        <h3>Bruk fill-kommandoen i chatten</h3>
+        <div class="code-block">/fill ~0 ~0 ~0 ~6 ~0 ~6 stone        // Gulv
+/fill ~0 ~1 ~0 ~6 ~4 ~0 stone        // Vegg nord
+/fill ~0 ~1 ~6 ~6 ~4 ~6 stone        // Vegg sør
+/fill ~0 ~1 ~0 ~0 ~4 ~6 stone        // Vegg vest
+/fill ~6 ~1 ~0 ~6 ~4 ~6 stone        // Vegg øst
+/fill ~0 ~5 ~0 ~6 ~5 ~6 oak_planks   // Tak
+/fill ~2 ~1 ~0 ~4 ~3 ~0 air          // Dør + vindu</div>
+
+        <div class="info-box">
+          <strong>Hva betyr ~?</strong> Tilde-tegnet (~) betyr «relativt til der jeg står nå». <code>~0 ~0 ~0</code> er der du står, <code>~6 ~5 ~6</code> er 6 blokker øst, 5 opp og 6 sør.
+        </div>
+
+        <div class="success"><strong>Kreativ utfordring:</strong> Legg til en takkonstruksjon med skrå tak ved hjelp av <code>/fill</code> og trapper (<code>oak_stairs</code>).</div>
+
+        <a class="video-link" href="https://www.youtube.com/watch?v=FbdqFSY3BaE" target="_blank">
+          <span class="yt-icon">▶ YouTube</span>
+          <div>
+            <div class="vid-title">Minecraft Fill Command – Build Structures Fast</div>
+            <div class="vid-meta">Grundig gjennomgang av /fill – perfekt for husbygging</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- TASK 6 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">🌀</span>
+        <div>
+          <strong>Oppgave 6: Spiraltårn</strong>
+          <span class="difficulty-badge hard" style="margin-left:0.75rem">Avansert</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Agenten går i en spiral oppover og plasserer blokker for hvert steg. Dette krever kombinasjon av bevegelse oppover og rotasjon.</p>
+
+        <div class="code-block">gjenta 20 ganger:        // 20 spiralsteg
+    agent gå fremover 1
+    agent plasser blokk ned
+    agent snu høyre 1 gang
+    agent gå opp 1</div>
+
+        <div class="info-box">
+          <strong>Hva skjer:</strong> Agenten går fremover, snur litt, og klatrer ett steg opp – og gjentar. Resultatet er en heliks/spiral av blokker.
+        </div>
+
+        <div class="warning"><strong>Utfordring:</strong> Hva skjer hvis du endrer «snu høyre» til 2 ganger? Eller gjenta 40 ganger? Eksperimenter!</div>
+
+        <a class="video-link" href="https://www.youtube.com/watch?v=hpUFsJQvKhc" target="_blank">
+          <span class="yt-icon">▶ YouTube</span>
+          <div>
+            <div class="vid-title">Spiral Tower with Agent – Advanced MakeCode</div>
+            <div class="vid-meta">Avansert agentprogrammering med spiral og løkker</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- BONUS RESOURCES -->
+    <div class="section">
+      <h2>📚 Nyttige ressurser</h2>
+
+      <a class="video-link" href="https://education.minecraft.net/en-us/resources/hour-of-code" target="_blank">
+        <span class="yt-icon" style="background:#107c10">🌐 Web</span>
+        <div>
+          <div class="vid-title">Minecraft Education – Hour of Code (offisiell)</div>
+          <div class="vid-meta">Gratis oppgaver og tutorials fra Microsoft/Mojang</div>
+        </div>
+      </a>
+
+      <a class="video-link" href="https://makecode.com/courses/csintro" target="_blank">
+        <span class="yt-icon" style="background:#107c10">🌐 Web</span>
+        <div>
+          <div class="vid-title">MakeCode: CS Intro Course</div>
+          <div class="vid-meta">Gratis kurs for nybegynnere – norsk tilgjengelig</div>
+        </div>
+      </a>
+
+      <a class="video-link" href="https://www.youtube.com/playlist?list=PLMMBk9hE-Scpj0H49SqSqMIJVwZT2UQOU" target="_blank">
+        <span class="yt-icon">▶ YouTube</span>
+        <div>
+          <div class="vid-title">Minecraft Education MakeCode – spilleliste</div>
+          <div class="vid-meta">Samling av tutorials fra nybegynner til viderekommen</div>
+        </div>
+      </a>
+
+      <a class="video-link" href="https://education.minecraft.net/en-us/blog/makecode-tutorials" target="_blank">
+        <span class="yt-icon" style="background:#107c10">🌐 Web</span>
+        <div>
+          <div class="vid-title">Offisielle MakeCode-tutorials fra Minecraft Education</div>
+          <div class="vid-meta">Steg-for-steg guides med bilder og kodeeksempler</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- COMPETITION / WRAP-UP -->
+    <div class="section">
+      <h2>🏆 Avsluttende utfordring</h2>
+      <div class="info-box">
+        <p>På slutten av økten: <strong>Hvem kan bygge den flotteste strukturen med kode?</strong></p>
+        <ul style="margin-top:0.75rem">
+          <li>Strukturen <em>må</em> bygges av agenten eller fill-kommandoen – ikke for hånd</li>
+          <li>Vis koden din til de andre</li>
+          <li>Stem på favorittstrukturen (ikke sin egen!)</li>
+        </ul>
+
+        <h3 style="margin-top:1rem">Poengsystem</h3>
+        <table>
+          <thead><tr><th>Kriterium</th><th>Poeng</th></tr></thead>
+          <tbody>
+            <tr><td>Strukturen er bygget med kode</td><td>3 poeng</td></tr>
+            <tr><td>Koden bruker minst én løkke</td><td>+2 poeng</td></tr>
+            <tr><td>Strukturen er 3D (har høyde)</td><td>+1 poeng</td></tr>
+            <tr><td>Kreativitetspoeng (stemmegivning)</td><td>+1 poeng</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="success"><strong>Vinner:</strong> Høyest poengsum. Ved likt – folkets valg avgjør! 🎉</div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Teknologilab | <a href="/" style="color: white; text-decoration: none;">Tilbake til forsiden</a></p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
 </body>
 </html>
