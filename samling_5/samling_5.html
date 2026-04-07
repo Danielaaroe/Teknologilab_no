@@ -17,10 +17,6 @@
       --code-bg: #f5f5f5;
       --accent: #5b8a3c;
       --accent2: #8b6914;
-      --grass: #5b8a3c;
-      --dirt: #8b6914;
-      --stone: #7a7a7a;
-      --diamond: #1ab3c4;
     }
     [data-theme="dark"] {
       --bg: #1a1a1a;
@@ -154,7 +150,6 @@
       border-color: rgba(255,255,255,0.2);
     }
 
-    /* Minecraft-style task cards */
     .task-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -208,31 +203,6 @@
     [data-theme="dark"] .easy { background: #1e3a22; color: #7fcc90; }
     [data-theme="dark"] .medium { background: #3a3318; color: #ccb055; }
     [data-theme="dark"] .hard { background: #3a1a1a; color: #cc7070; }
-
-    /* Minecraft block visual for coordinate explanation */
-    .coord-diagram {
-      background: var(--code-bg);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      text-align: center;
-      border: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .mc-block {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      border: 2px solid rgba(0,0,0,0.3);
-      border-radius: 3px;
-      font-size: 0.65rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-    }
 
     .video-link {
       display: flex;
@@ -308,6 +278,17 @@
     .y-axis { color: #27ae60; }
     .z-axis { color: #2980b9; }
 
+    /* Agent direction diagram */
+    .agent-diagram {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      text-align: center;
+      font-size: 1.1em;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
     footer {
       background: #333;
       color: white;
@@ -339,7 +320,7 @@
 
     <div class="section">
       <h2>⛏️ Minecraft Education: Kode og Bygging</h2>
-      <p>Lær å programmere i Minecraft Education Edition! Vi bruker <strong>MakeCode (blokkprogrammering)</strong> til å bygge strukturer, kontrollere agenten og utforske koordinatsystemet – alt inne i Minecraft.</p>
+      <p>Lær å programmere i Minecraft Education Edition! Vi bruker <strong>MakeCode (blokkprogrammering)</strong> til å styre Agenten – en liten robot som bygger for deg inne i Minecraft.</p>
       <div class="success">
         <strong>Hva trenger du?</strong> Minecraft Education Edition (skolelisens), PC eller iPad, og en Microsoft/skole-konto. Ingen ekstra installasjon nødvendig.
       </div>
@@ -350,72 +331,36 @@
       <h2>🎯 Læringsmål</h2>
       <div class="info-box">
         <ul>
-          <li>Forstå koordinatsystemet i Minecraft (X, Y, Z)</li>
-          <li>Bruke MakeCode-agenten til å bygge automatisk</li>
-          <li>Lage løkker og betingelser i blokkprogrammering</li>
-          <li>Bygge enkle og mer komplekse strukturer med kode</li>
-          <li>Forstå sammenhengen mellom kode og det som skjer i spillet</li>
+          <li>Styre Agenten med MakeCode-blokker</li>
+          <li>Forstå hva en løkke er, og hvorfor den er nyttig</li>
+          <li>Bygge enkle strukturer automatisk med kode</li>
+          <li>Eksperimentere og fikse feil i programmet sitt</li>
         </ul>
       </div>
-    </div>
-
-    <!-- COORDINATE SYSTEM -->
-    <div class="section">
-      <h2>🗺️ Koordinatsystemet i Minecraft</h2>
-      <p>Minecraft bruker tre akser for å beskrive posisjoner i verden. Disse kalles X, Y og Z.</p>
-
-      <div class="info-box">
-        <table class="coord-table">
-          <thead>
-            <tr><th>Akse</th><th>Retning</th><th>Eksempel</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="x-axis">X (Øst/Vest)</td>
-              <td>Øst = høyere X, Vest = lavere X</td>
-              <td>X: 100 er lenger øst enn X: 50</td>
-            </tr>
-            <tr>
-              <td class="y-axis">Y (Opp/Ned)</td>
-              <td>Opp = høyere Y, ned = lavere Y</td>
-              <td>Havnivå = Y: 64, grotte = Y: 20</td>
-            </tr>
-            <tr>
-              <td class="z-axis">Z (Nord/Sør)</td>
-              <td>Sør = høyere Z, Nord = lavere Z</td>
-              <td>Z: 200 er lenger sør enn Z: 100</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="warning">
-        <strong>💡 Tips:</strong> Trykk <strong>F3</strong> (PC) i spillet for å se koordinatene dine øverst til venstre. Prøv å gå i forskjellige retninger og se hva som endrer seg!
-      </div>
-
-      <a class="video-link" href="https://www.youtube.com/watch?v=4otE0kYJAi0" target="_blank">
-        <span class="yt-icon">▶ YouTube</span>
-        <div>
-          <div class="vid-title">Minecraft Coordinate System Explained</div>
-          <div class="vid-meta">Enkel forklaring av X, Y, Z – god intro for nybegynnere</div>
-        </div>
-      </a>
     </div>
 
     <!-- AGENT INTRO -->
     <div class="section">
       <h2>🤖 Hva er Agenten?</h2>
-      <p>I Minecraft Education har du en hjelper som heter <strong>Agenten</strong>. Agenten kan du programmere til å gjøre ting for deg – gå, bygge, grave og plante. Tenk på agenten som en robot du styrer med kode.</p>
+      <p>I Minecraft Education har du en hjelper som heter <strong>Agenten</strong>. Agenten er som en liten robot du kan programmere til å gå, bygge og grave – mens du selv bare ser på!</p>
+
+      <div class="agent-diagram">
+        🧑 Du skriver kode → 💻 MakeCode sender den til Minecraft → 🤖 Agenten gjør det du ba om
+      </div>
 
       <div class="info-box">
         <strong>Slik åpner du MakeCode:</strong>
         <ol style="margin: 0.5rem 0 0 1.5rem;">
-          <li>Åpne chat i Minecraft (T-tasten)</li>
+          <li>Åpne chat i Minecraft (<strong>T-tasten</strong> på PC, chat-ikonet på iPad)</li>
           <li>Skriv <code style="background:var(--code-bg);padding:0.1rem 0.4rem;border-radius:3px;">/code</code> og trykk Enter</li>
-          <li>Velg «MakeCode» – nettleserprogrammeringen åpner seg</li>
+          <li>Velg <strong>«MakeCode»</strong> – programmeringsvinduet åpner seg</li>
           <li>Dra og slipp blokker for å lage programmer</li>
-          <li>Trykk «Spill» for å kjøre koden</li>
+          <li>Trykk <strong>«Spill»</strong> for å kjøre koden – og se hva agenten gjør!</li>
         </ol>
+      </div>
+
+      <div class="warning">
+        <strong>💡 Tips:</strong> Agenten starter alltid der du er. Plasser deg på et åpent sted før du kjører koden, så agenten har plass til å bevege seg.
       </div>
 
       <a class="video-link" href="https://www.youtube.com/watch?v=3fVDI0cwSqw" target="_blank">
@@ -425,6 +370,26 @@
           <div class="vid-meta">Offisiell intro – åpne MakeCode og bruk agenten første gang</div>
         </div>
       </a>
+    </div>
+
+    <!-- WHAT IS A LOOP -->
+    <div class="section">
+      <h2>🔁 Hva er en løkke?</h2>
+      <p>En løkke er en måte å si til datamaskinen: <em>«gjør dette flere ganger»</em> – uten at du trenger å skrive det samme om og om igjen.</p>
+
+      <div class="info-box">
+        <strong>Eksempel uten løkke</strong> – tungvint!<br>
+        <div class="code-block">agent gå fremover 1
+agent gå fremover 1
+agent gå fremover 1
+agent gå fremover 1
+agent gå fremover 1</div>
+
+        <strong>Eksempel med løkke</strong> – mye bedre!<br>
+        <div class="code-block">gjenta 5 ganger:
+    agent gå fremover 1</div>
+        Begge gjør det samme: agenten går 5 steg fremover. Men med løkken slipper du å skrive det 5 ganger!
+      </div>
     </div>
 
     <!-- TASK OVERVIEW -->
@@ -439,62 +404,62 @@
           </div>
           <div class="task-card-body">
             <span class="difficulty-badge easy">Enkel</span>
-            <p>Få agenten til å gå fremover, bakover og til siden. Lær grunnleggende kommandoer.</p>
+            <p>Få agenten til å gå fremover, bakover og til siden. Lær de grunnleggende kommandoene.</p>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header">
+            <span class="icon">🔄</span>
+            <h3>Oppgave 2: Firkant-tur</h3>
+          </div>
+          <div class="task-card-body">
+            <span class="difficulty-badge easy">Enkel</span>
+            <p>Bruk en løkke til å få agenten til å gå i en firkant. Lær om gjentagelse.</p>
           </div>
         </div>
 
         <div class="task-card">
           <div class="task-card-header">
             <span class="icon">📦</span>
-            <h3>Oppgave 2: Legg en rad blokker</h3>
+            <h3>Oppgave 3: Legg en rad blokker</h3>
           </div>
           <div class="task-card-body">
             <span class="difficulty-badge easy">Enkel</span>
-            <p>Bruk agenten til å plassere en rad med blokker ved hjelp av en løkke.</p>
+            <p>Få agenten til å plassere blokker mens den går. Bygg din første rad!</p>
           </div>
         </div>
 
         <div class="task-card">
           <div class="task-card-header">
             <span class="icon">⬛</span>
-            <h3>Oppgave 3: Bygg et gulv</h3>
+            <h3>Oppgave 4: Bygg et gulv</h3>
           </div>
           <div class="task-card-body">
             <span class="difficulty-badge easy">Enkel</span>
-            <p>Bruk dobbel løkke til å bygge et flatt gulv (5×5 blokker).</p>
+            <p>Bruk løkke inni løkke til å bygge et flatt gulv på 5×5 blokker.</p>
           </div>
         </div>
 
         <div class="task-card">
           <div class="task-card-header">
             <span class="icon">🧱</span>
-            <h3>Oppgave 4: Bygg en vegg</h3>
+            <h3>Oppgave 5: Bygg en vegg</h3>
           </div>
           <div class="task-card-body">
             <span class="difficulty-badge medium">Middels</span>
-            <p>Bygg en vegg med høyde og bredde. Kombiner bevegelse og plassering.</p>
+            <p>Bygg en vegg med høyde og bredde. Agenten beveger seg i to retninger!</p>
           </div>
         </div>
 
         <div class="task-card">
           <div class="task-card-header">
-            <span class="icon">🏠</span>
-            <h3>Oppgave 5: Bygg et hus</h3>
+            <span class="icon">🌲</span>
+            <h3>Oppgave 6: Bygg et tre</h3>
           </div>
           <div class="task-card-body">
             <span class="difficulty-badge medium">Middels</span>
-            <p>Bygg fire vegger og ett tak. Legg til dør og vindu med <code>fill</code>-kommandoen.</p>
-          </div>
-        </div>
-
-        <div class="task-card">
-          <div class="task-card-header">
-            <span class="icon">🌀</span>
-            <h3>Oppgave 6: Spiraltårn</h3>
-          </div>
-          <div class="task-card-body">
-            <span class="difficulty-badge hard">Avansert</span>
-            <p>Bygg et tårn der agenten går i spiral oppover. Krever god forståelse av løkker og retning.</p>
+            <p>Bygg en stamme og en krone av blader. Kombiner det du har lært!</p>
           </div>
         </div>
 
@@ -511,52 +476,98 @@
         </div>
       </div>
       <div class="task-detail-body">
-        <p>Målet er å få agenten til å gå rundt i verden – og forstå hva som skjer med koordinatene når den beveger seg.</p>
+        <p>Målet er å skjønne hvordan du styrer agenten – og se hva som skjer i Minecraft når du kjører koden.</p>
 
         <h3>Hva du skal gjøre</h3>
         <ol class="step-list">
           <li>Åpne MakeCode med <code>/code</code> i chatten</li>
           <li>Finn blokken <strong>«agent move forward by 1»</strong> under «Agent»-menyen</li>
-          <li>Legg den inn i <strong>«on start»</strong>-blokken og kjør programmet</li>
-          <li>Legg til <strong>«agent turn left»</strong> og <strong>«agent move forward»</strong> igjen – hva skjer?</li>
-          <li>Prøv å lage et program som får agenten til å gå en firkant (frem, venstre ×4)</li>
+          <li>Dra den inn i <strong>«on start»</strong>-blokken og trykk «Spill» – hva skjer?</li>
+          <li>Legg til <strong>«agent turn left»</strong> og <strong>«agent move forward by 1»</strong> igjen</li>
+          <li>Prøv ulike kombinasjoner – hva gjør agenten?</li>
         </ol>
 
-        <div class="code-block">// Pseudokode for firkant:
-gjenta 4 ganger:
-    agent gå fremover 5
-    agent snu til venstre</div>
+        <h3>Agentens retningsblokker</h3>
+        <div class="info-box">
+          <table>
+            <thead><tr><th>Blokk</th><th>Hva den gjør</th></tr></thead>
+            <tbody>
+              <tr><td><code>agent move forward by 1</code></td><td>Agenten går ett steg fremover</td></tr>
+              <tr><td><code>agent move back by 1</code></td><td>Agenten går ett steg bakover</td></tr>
+              <tr><td><code>agent turn left</code></td><td>Agenten snur til venstre (90°)</td></tr>
+              <tr><td><code>agent turn right</code></td><td>Agenten snur til høyre (90°)</td></tr>
+              <tr><td><code>agent move up by 1</code></td><td>Agenten klatrer ett steg opp</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-        <div class="success"><strong>Utfordring:</strong> Sjekk F3-koordinatene før og etter agenten går. Hvilken akse endret seg?</div>
+        <div class="success"><strong>Utfordring:</strong> Kan du få agenten til å gå tilbake til der den startet?</div>
       </div>
     </div>
 
     <!-- TASK 2 DETAIL -->
     <div class="task-detail">
       <div class="task-detail-header">
-        <span style="font-size:1.5rem">📦</span>
+        <span style="font-size:1.5rem">🔄</span>
         <div>
-          <strong>Oppgave 2: Legg en rad blokker</strong>
+          <strong>Oppgave 2: Firkant-tur</strong>
           <span class="difficulty-badge easy" style="margin-left:0.75rem">Enkel</span>
         </div>
       </div>
       <div class="task-detail-body">
-        <p>Agenten kan plassere blokker mens den går. Vi bruker en <strong>løkke</strong> for å gjenta handlingen automatisk.</p>
+        <p>Nå skal agenten gå i en firkant – og vi bruker en <strong>løkke</strong> for å unngå å skrive det samme fire ganger.</p>
+
+        <h3>Uten løkke – tungvint</h3>
+        <div class="code-block">agent move forward by 5
+agent turn left
+agent move forward by 5
+agent turn left
+agent move forward by 5
+agent turn left
+agent move forward by 5
+agent turn left</div>
+
+        <h3>Med løkke – mye bedre!</h3>
+        <div class="code-block">gjenta 4 ganger:
+    agent move forward by 5
+    agent turn left</div>
+
+        <div class="info-box">
+          <strong>Hva skjer?</strong> Blokken «gjenta 4 ganger» (repeat 4 times) gjør at alt inni den kjøres 4 ganger. Agenten går frem 5 steg og snur – fire ganger – og er tilbake der den startet!
+        </div>
+
+        <div class="success"><strong>Utfordring:</strong> Hva skjer hvis du bytter «turn left» med «turn right»? Prøv!</div>
+      </div>
+    </div>
+
+    <!-- TASK 3 DETAIL -->
+    <div class="task-detail">
+      <div class="task-detail-header">
+        <span style="font-size:1.5rem">📦</span>
+        <div>
+          <strong>Oppgave 3: Legg en rad blokker</strong>
+          <span class="difficulty-badge easy" style="margin-left:0.75rem">Enkel</span>
+        </div>
+      </div>
+      <div class="task-detail-body">
+        <p>Agenten kan plassere blokker mens den går. Vi kombinerer bevegelse og blokkplassering i en løkke.</p>
 
         <h3>Forberedelse</h3>
         <div class="steps">
           <ul>
-            <li>Gi agenten blokker: høyreklikk på agenten → legg stein i slot 1</li>
-            <li>Bruk blokken <strong>«agent place on move»</strong> for å plassere automatisk</li>
+            <li>Høyreklikk på agenten (PC) eller trykk lenge (iPad) → legg stein i <strong>slot 1</strong></li>
+            <li>Agenten plasserer blokker fra slot 1 automatisk når du bruker riktig blokk</li>
           </ul>
         </div>
 
-        <h3>Program (MakeCode-blokker)</h3>
+        <h3>Program</h3>
         <div class="code-block">gjenta 10 ganger:
-    agent gå fremover 1
-    agent plasser blokk fremover</div>
+    agent move forward by 1
+    agent place down</div>
 
-        <div class="warning"><strong>OBS:</strong> Agenten må ha blokker i inventory – ellers skjer ingenting!</div>
+        <div class="warning"><strong>OBS:</strong> Agenten må ha blokker i inventory (slot 1) – ellers skjer ingenting! Gi den minst 10 steinblokker.</div>
+
+        <div class="success"><strong>Utfordring:</strong> Bytt ut stein med en annen blokktype. Kan du lage en fargerik rad?</div>
 
         <a class="video-link" href="https://www.youtube.com/watch?v=ckbGMFVhkxo" target="_blank">
           <span class="yt-icon">▶ YouTube</span>
@@ -568,58 +579,69 @@ gjenta 4 ganger:
       </div>
     </div>
 
-    <!-- TASK 3 DETAIL -->
+    <!-- TASK 4 DETAIL -->
     <div class="task-detail">
       <div class="task-detail-header">
         <span style="font-size:1.5rem">⬛</span>
         <div>
-          <strong>Oppgave 3: Bygg et gulv (5×5)</strong>
+          <strong>Oppgave 4: Bygg et gulv (5×5)</strong>
           <span class="difficulty-badge easy" style="margin-left:0.75rem">Enkel</span>
         </div>
       </div>
       <div class="task-detail-body">
-        <p>Nå bruker vi en <strong>løkke inni en løkke</strong> (nestet løkke) for å bygge et flatt gulv.</p>
-
-        <div class="code-block">gjenta 5 ganger:          // 5 rader
-    gjenta 5 ganger:      // 5 blokker per rad
-        agent gå fremover 1
-        agent plasser blokk ned
-    agent snu høyre
-    agent gå fremover 1
-    agent snu venstre</div>
+        <p>Nå bruker vi en <strong>løkke inni en løkke</strong> for å bygge et helt gulv – ikke bare én rad.</p>
 
         <div class="info-box">
-          <strong>Hva skjer her?</strong><br>
-          Den indre løkken bygger én rad. Den ytre løkken gjentar dette 5 ganger, og mellom hver rad beveger agenten seg ett steg til siden for å starte på ny rad.
+          <strong>Tenk deg det slik:</strong><br>
+          Agenten bygger én rad med 5 blokker. Deretter går den ett steg til siden og bygger neste rad. Den gjør dette 5 ganger – da er gulvet ferdig!
+        </div>
+
+        <div class="code-block">gjenta 5 ganger:          ← ytre løkke: 5 rader
+    gjenta 5 ganger:      ← indre løkke: 5 blokker per rad
+        agent move forward by 1
+        agent place down
+    agent turn right
+    agent move forward by 1
+    agent turn left</div>
+
+        <div class="warning">
+          <strong>💡 Hva betyr «ytre» og «indre» løkke?</strong><br>
+          Den <em>indre</em> løkken kjøres ferdig for hvert steg i den <em>ytre</em> løkken. Tenk deg det som: for hver rad (ytre), legg 5 blokker (indre).
         </div>
 
         <div class="success"><strong>Utfordring:</strong> Bytt ut stein med forskjellige blokker – kan du lage et sjakkmønster?</div>
       </div>
     </div>
 
-    <!-- TASK 4 DETAIL -->
+    <!-- TASK 5 DETAIL -->
     <div class="task-detail">
       <div class="task-detail-header">
         <span style="font-size:1.5rem">🧱</span>
         <div>
-          <strong>Oppgave 4: Bygg en vegg</strong>
+          <strong>Oppgave 5: Bygg en vegg</strong>
           <span class="difficulty-badge medium" style="margin-left:0.75rem">Middels</span>
         </div>
       </div>
       <div class="task-detail-body">
-        <p>Vi bygger en vegg som er 6 blokker bred og 4 blokker høy. Agenten bygger én kolonne, flyttes opp, bygger neste kolonne osv.</p>
+        <p>Vi bygger en vegg som er 6 blokker bred og 4 blokker høy. Agenten bygger én rad, flyttes opp, bygger neste rad og så videre.</p>
 
-        <div class="code-block">gjenta 4 ganger:              // 4 etasjer
-    gjenta 6 ganger:          // 6 blokker bredt
-        agent gå fremover 1
-        agent plasser blokk fremover
-    agent gå opp 1
-    // Gå tilbake til start av rad
-    agent snu rundt
-    agent gå fremover 6
-    agent snu rundt</div>
+        <div class="info-box">
+          <strong>Planlegg før du koder:</strong><br>
+          Agenten starter nede til venstre. Den bygger én rad bortover, klatrer opp ett steg, snur rundt og bygger tilbake. Den gjør dette for hver etasje.
+        </div>
 
-        <div class="warning"><strong>Hint:</strong> «Agent move up» finnes under Agent-blokker. Agenten kan bevege seg i alle seks retninger!</div>
+        <div class="code-block">gjenta 4 ganger:              ← 4 etasjer
+    gjenta 6 ganger:          ← 6 blokker bredt
+        agent move forward by 1
+        agent place forward
+    agent move up by 1
+    agent turn around        ← snu 180°
+    agent move forward by 6
+    agent turn around        ← snu tilbake</div>
+
+        <div class="warning">
+          <strong>Hint:</strong> «Turn around» er to «turn left» eller to «turn right» etter hverandre – agenten snur seg 180 grader!
+        </div>
 
         <a class="video-link" href="https://www.youtube.com/watch?v=WNs3smXKzFs" target="_blank">
           <span class="yt-icon">▶ YouTube</span>
@@ -628,75 +650,55 @@ gjenta 4 ganger:
             <div class="vid-meta">Demonstrerer vegger og 3D-bevegelse med agenten</div>
           </div>
         </a>
-      </div>
-    </div>
 
-    <!-- TASK 5 DETAIL -->
-    <div class="task-detail">
-      <div class="task-detail-header">
-        <span style="font-size:1.5rem">🏠</span>
-        <div>
-          <strong>Oppgave 5: Bygg et hus</strong>
-          <span class="difficulty-badge medium" style="margin-left:0.75rem">Middels</span>
-        </div>
-      </div>
-      <div class="task-detail-body">
-        <p>Kombiner gulv, vegger og tak til et enkelt hus. Her bruker vi også <strong>«fill»-kommandoen</strong> for å fylle store volumer raskt.</p>
-
-        <h3>Bruk fill-kommandoen i chatten</h3>
-        <div class="code-block">/fill ~0 ~0 ~0 ~6 ~0 ~6 stone        // Gulv
-/fill ~0 ~1 ~0 ~6 ~4 ~0 stone        // Vegg nord
-/fill ~0 ~1 ~6 ~6 ~4 ~6 stone        // Vegg sør
-/fill ~0 ~1 ~0 ~0 ~4 ~6 stone        // Vegg vest
-/fill ~6 ~1 ~0 ~6 ~4 ~6 stone        // Vegg øst
-/fill ~0 ~5 ~0 ~6 ~5 ~6 oak_planks   // Tak
-/fill ~2 ~1 ~0 ~4 ~3 ~0 air          // Dør + vindu</div>
-
-        <div class="info-box">
-          <strong>Hva betyr ~?</strong> Tilde-tegnet (~) betyr «relativt til der jeg står nå». <code>~0 ~0 ~0</code> er der du står, <code>~6 ~5 ~6</code> er 6 blokker øst, 5 opp og 6 sør.
-        </div>
-
-        <div class="success"><strong>Kreativ utfordring:</strong> Legg til en takkonstruksjon med skrå tak ved hjelp av <code>/fill</code> og trapper (<code>oak_stairs</code>).</div>
-
-        <a class="video-link" href="https://www.youtube.com/watch?v=FbdqFSY3BaE" target="_blank">
-          <span class="yt-icon">▶ YouTube</span>
-          <div>
-            <div class="vid-title">Minecraft Fill Command – Build Structures Fast</div>
-            <div class="vid-meta">Grundig gjennomgang av /fill – perfekt for husbygging</div>
-          </div>
-        </a>
+        <div class="success"><strong>Utfordring:</strong> Kan du bygge fire vegger som danner et rom? Hint: bruk firkant-løkken fra oppgave 2, men med veggen!</div>
       </div>
     </div>
 
     <!-- TASK 6 DETAIL -->
     <div class="task-detail">
       <div class="task-detail-header">
-        <span style="font-size:1.5rem">🌀</span>
+        <span style="font-size:1.5rem">🌲</span>
         <div>
-          <strong>Oppgave 6: Spiraltårn</strong>
-          <span class="difficulty-badge hard" style="margin-left:0.75rem">Avansert</span>
+          <strong>Oppgave 6: Bygg et tre</strong>
+          <span class="difficulty-badge medium" style="margin-left:0.75rem">Middels</span>
         </div>
       </div>
       <div class="task-detail-body">
-        <p>Agenten går i en spiral oppover og plasserer blokker for hvert steg. Dette krever kombinasjon av bevegelse oppover og rotasjon.</p>
+        <p>Kombiner det du har lært til å bygge et enkelt tre – en stamme og en firkantet krone av blader øverst.</p>
 
-        <div class="code-block">gjenta 20 ganger:        // 20 spiralsteg
-    agent gå fremover 1
-    agent plasser blokk ned
-    agent snu høyre 1 gang
-    agent gå opp 1</div>
+        <h3>Del 1: Bygg stammen</h3>
+        <div class="code-block">// Gi agenten trestokk (oak_log) i slot 1
+gjenta 5 ganger:
+    agent place down
+    agent move up by 1</div>
+
+        <h3>Del 2: Bygg bladkronen (5×5 gulv i luften)</h3>
+        <div class="code-block">// Gi agenten blader (oak_leaves) i slot 1
+// Agenten er nå øverst på stammen
+agent move up by 1    ← ett steg opp for kronen
+
+gjenta 5 ganger:
+    gjenta 5 ganger:
+        agent move forward by 1
+        agent place down
+    agent turn right
+    agent move forward by 1
+    agent turn left</div>
 
         <div class="info-box">
-          <strong>Hva skjer:</strong> Agenten går fremover, snur litt, og klatrer ett steg opp – og gjentar. Resultatet er en heliks/spiral av blokker.
+          <strong>Tips:</strong> Du trenger å flytte agenten til riktig startposisjon (hjørnet av kronen) før du kjører del 2. Prøv å finne ut hvordan du gjør det!
         </div>
 
-        <div class="warning"><strong>Utfordring:</strong> Hva skjer hvis du endrer «snu høyre» til 2 ganger? Eller gjenta 40 ganger? Eksperimenter!</div>
+        <div class="success">
+          <strong>Kreativ utfordring:</strong> Legg til en ekstra blokkrad rundt stammen nederst som røtter, eller bygg to trær ved siden av hverandre.
+        </div>
 
         <a class="video-link" href="https://www.youtube.com/watch?v=hpUFsJQvKhc" target="_blank">
           <span class="yt-icon">▶ YouTube</span>
           <div>
-            <div class="vid-title">Spiral Tower with Agent – Advanced MakeCode</div>
-            <div class="vid-meta">Avansert agentprogrammering med spiral og løkker</div>
+            <div class="vid-title">Minecraft Education MakeCode – Building with the Agent</div>
+            <div class="vid-meta">Eksempler på å kombinere løkker og bevegelse</div>
           </div>
         </a>
       </div>
@@ -745,7 +747,7 @@ gjenta 4 ganger:
       <div class="info-box">
         <p>På slutten av økten: <strong>Hvem kan bygge den flotteste strukturen med kode?</strong></p>
         <ul style="margin-top:0.75rem">
-          <li>Strukturen <em>må</em> bygges av agenten eller fill-kommandoen – ikke for hånd</li>
+          <li>Strukturen <em>må</em> bygges av agenten – ikke for hånd</li>
           <li>Vis koden din til de andre</li>
           <li>Stem på favorittstrukturen (ikke sin egen!)</li>
         </ul>
