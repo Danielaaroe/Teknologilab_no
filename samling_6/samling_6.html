@@ -71,66 +71,94 @@
     [data-theme="dark"] .challenge { background: #2a3a2a; color: #90e0a0; border-left-color: #28a745; }
     .subtasks { margin: 0.5rem 0 0.75rem 1.5rem; }
     .subtasks li { margin: 0.35rem 0; }
+    code { background: var(--code-bg); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 0.92em; }
+    footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
 
-    /* Dropdown */
     .solution-dropdown {
-      margin: 1rem 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-secondary);
-      overflow: hidden;
+      margin: 0.75rem 0;
     }
     .solution-dropdown summary {
       cursor: pointer;
-      padding: 0.9rem 1rem;
       font-weight: bold;
       color: var(--border);
-      list-style: none;
+      margin-bottom: 0.5rem;
     }
-    .solution-dropdown summary::-webkit-details-marker { display: none; }
-    .solution-dropdown summary::after { content: " ▼"; float: right; }
-    .solution-dropdown[open] summary::after { content: " ▲"; }
-    .solution-dropdown > *:not(summary) {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    .solution-dropdown > *:last-child { padding-bottom: 1rem; }
 
-    code { background: var(--code-bg); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 0.92em; }
-    footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+    @media (max-width: 600px) {
+      .image-container { height: 160px; padding: 1rem; }
+      .container { padding: 1rem; }
+      .task-body { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+    <div class="image-container">
+      <a href="/index.html">
+        <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo" />
+      </a>
+    </div>
+  </header>
 
-<div class="container">
+  <div class="container">
+    <div class="intro">
+      <h2>⛏️ Byggeoppgaver med Agenten</h2>
+      <p>Disse oppgavene tar deg steg for steg fra det enkle til det avanserte. Hver oppgave bygger på det du lærte i forrige – så ikke hopp over!</p>
+    </div>
 
-<!-- OPPGAVE 1 -->
-<div class="task">
-  <div class="task-body">
-    <p>Agenten skal gå fremover og legge blokker – og lage en rett linje på bakken.</p>
+    <div class="setup-box">
+      <h3>🚀 Slik kommer du i gang</h3>
+      <ol>
+        <li>Åpne chat (<strong>T</strong> på PC, chat-ikonet på iPad) og skriv <code>/code</code></li>
+        <li>Velg <strong>MakeCode</strong></li>
+        <li>Gå bort til agenten i Minecraft, høyreklikk (PC) eller trykk lenge (iPad) og gi den blokker i slot 1</li>
+        <li>Skriv koden i MakeCode og trykk <strong>Spill</strong> for å kjøre</li>
+      </ol>
+      <p style="margin-top:0.75rem">
+        <strong>Nøkkelblokk – «agent place on move»:</strong> Slå denne PÅ så legger agenten automatisk blokker under seg mens den går. Slå den AV når du vil flytte agenten uten å bygge.
+      </p>
+    </div>
 
-    <details class="solution-dropdown">
-      <summary>Vis løsningsforslag</summary>
-
-      <div class="code-label">MakeCode-blokker</div>
-      <div class="code-block">agent place on move  ON
+    <!-- OPPGAVE 1 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">1</span>
+        <span class="task-icon">➖</span>
+        <span class="task-title">Bygg en linje</span>
+      </div>
+      <div class="task-body">
+        <p>Agenten skal gå fremover og legge blokker – og lage en rett linje på bakken.</p>
+        <details class="solution-dropdown">
+          <summary>Vis løsningsforslag</summary>
+          <div class="code-label">MakeCode-blokker (legg i «on start»)</div>
+          <div class="code-block">agent place on move  ON
 agent move forward by 10
 agent place on move  OFF</div>
+          <div class="tip">💡 <strong>«place on move»</strong> gjør at agenten legger én blokk under seg for hvert steg den tar. Husk å slå den AV etterpå, ellers fortsetter agenten å bygge neste gang du flytter den!</div>
+        </details>
+        <p><strong>Deloppgaver:</strong></p>
+        <ul class="subtasks">
+          <li>Bygg en linje på 5 blokker</li>
+          <li>Bygg en linje på 10 blokker</li>
+          <li>Bytt blokktype – gi agenten andre blokker i inventoryet og kjør koden igjen</li>
+        </ul>
+      </div>
+    </div>
 
-      <div class="tip">💡 «place on move» legger blokk for hvert steg.</div>
-    </details>
-
-  </div>
-</div>
-
-<!-- OPPGAVE 2 -->
-<div class="task">
-  <div class="task-body">
-
-    <details class="solution-dropdown">
-      <summary>Vis løsningsforslag</summary>
-
-      <div class="code-block">agent place on move  ON
+    <!-- OPPGAVE 2 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">2</span>
+        <span class="task-icon">⬛</span>
+        <span class="task-title">Bygg et gulv – 5×5</span>
+      </div>
+      <div class="task-body">
+        <p>Nå skal agenten bygge et flatt gulv. Vi bruker en løkke til å gjenta én rad fem ganger.</p>
+        <details class="solution-dropdown">
+          <summary>Vis løsningsforslag</summary>
+          <div class="code-label">MakeCode-blokker</div>
+          <div class="code-block">agent place on move  ON
 
 repeat 5 times
     agent move forward by 5
@@ -141,20 +169,30 @@ repeat 5 times
     agent place on move  ON
 
 agent place on move  OFF</div>
+          <div class="tip">💡 Agenten bygger én rad på 5, slår av «place on move», forskyver seg én blokk til siden, slår den på igjen, og gjentar – totalt 5 rader.</div>
+        </details>
+        <p><strong>Deloppgaver:</strong></p>
+        <ul class="subtasks">
+          <li>Bygg et 5×5 gulv</li>
+          <li>Endre til 8×8 – hva må du endre i koden?</li>
+          <li>Bygg to gulv ved siden av hverandre med ulike blokktyper</li>
+        </ul>
+      </div>
+    </div>
 
-    </details>
-
-  </div>
-</div>
-
-<!-- OPPGAVE 3 -->
-<div class="task">
-  <div class="task-body">
-
-    <details class="solution-dropdown">
-      <summary>Vis løsningsforslag</summary>
-
-      <div class="code-block">repeat 5 times
+    <!-- OPPGAVE 3 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">3</span>
+        <span class="task-icon">🟫</span>
+        <span class="task-title">Bygg en kube – 5×5×5</span>
+      </div>
+      <div class="task-body">
+        <p>Bygg fem gulv oppå hverandre! Etter hvert gulv slår du av «place on move», klatrer opp, og starter på nytt.</p>
+        <details class="solution-dropdown">
+          <summary>Vis løsningsforslag</summary>
+          <div class="code-label">MakeCode-blokker</div>
+          <div class="code-block">repeat 5 times
     agent place on move  ON
     repeat 5 times
         agent move forward by 5
@@ -165,82 +203,162 @@ agent place on move  OFF</div>
         agent place on move  ON
     agent place on move  OFF
     agent move up by 1</div>
+          <div class="tip">💡 Den ytre løkken gjentar hele gulvet 5 ganger. Mellom hvert gulv klatrer agenten opp ett steg – men uten å legge blokker.</div>
+        </details>
+        <p><strong>Deloppgaver:</strong></p>
+        <ul class="subtasks">
+          <li>Bygg en solid 5×5×5 kube</li>
+          <li>Prøv en 3×3×3 kube – hva må du endre?</li>
+        </ul>
+        <div class="challenge">✨ <strong>Ekstrautfordring:</strong> Kan du bygge bare yttervegger og tak – en hul kube? Da må du tenke på hvilke rader som <em>ikke</em> skal plassere blokker.</div>
+      </div>
+    </div>
 
-    </details>
-
-  </div>
-</div>
-
-<!-- OPPGAVE 4 -->
-<div class="task">
-  <div class="task-body">
-
-    <details class="solution-dropdown">
-      <summary>Vis løsningsforslag</summary>
-
-      <div class="code-block">repeat 4 times
+    <!-- OPPGAVE 4 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">4</span>
+        <span class="task-icon">🧱</span>
+        <span class="task-title">Bygg en vegg</span>
+      </div>
+      <div class="task-body">
+        <p>En vegg er bred og høy, men bare én blokk tykk. Agenten bygger én rad, klatrer opp, snur 180° og bygger tilbake.</p>
+        <details class="solution-dropdown">
+          <summary>Vis løsningsforslag</summary>
+          <div class="code-label">MakeCode-blokker</div>
+          <div class="code-block">repeat 4 times
     agent place on move  ON
     agent move forward by 6
     agent place on move  OFF
     agent move up by 1
     agent turn left
-    agent turn left
+    agent turn left          ← to venstresving = 180°
     agent move forward by 6
     agent turn left
-    agent turn left
+    agent turn left          ← snu tilbake igjen
     agent place on move  ON</div>
+          <div class="tip">💡 To <strong>turn left</strong> etter hverandre snur agenten helt rundt (180°) slik at den kan bygge neste rad i motsatt retning. Husk å slå av «place on move» mellom radene, ellers legger agenten blokker mens den repositionerer seg.</div>
+        </details>
+        <p><strong>Deloppgaver:</strong></p>
+        <ul class="subtasks">
+          <li>Bygg en vegg 6 bred og 4 høy</li>
+          <li>Bygg fire vegger som danner et lukket rom</li>
+        </ul>
+      </div>
+    </div>
 
-    </details>
+    <!-- OPPGAVE 5 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">5</span>
+        <span class="task-icon">🪜</span>
+        <span class="task-title">Bygg en trapp</span>
+      </div>
+      <div class="task-body">
+        <p>En trapp stiger ett hakk opp for hvert steg fremover. Agenten legger én blokk, går fremover, slår av, klatrer opp – og gjentar.</p>
+        <details class="solution-dropdown">
+          <summary>Vis løsningsforslag</summary>
+          <div class="code-label">MakeCode-blokker</div>
+          <div class="code-block">repeat 6 times
+    agent place on move  ON
+    agent move forward by 1
+    agent place on move  OFF
+    agent move up by 1</div>
+          <div class="tip">💡 «Place on move» er PÅ kun når agenten tar trinnet fremover. Når agenten klatrer opp er den AV – ellers ville det legges blokker i lufta!</div>
+        </details>
+        <p><strong>Deloppgaver:</strong></p>
+        <ul class="subtasks">
+          <li>Bygg en trapp opp 6 trinn</li>
+          <li>Bygg trappen ned igjen på andre siden – bruk <code>move down</code> etter hvert trinn</li>
+          <li>Lag en trapp som er 3 blokker bred</li>
+        </ul>
+      </div>
+    </div>
 
-  </div>
-</div>
+    <!-- OPPGAVE 6 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">6</span>
+        <span class="task-icon">🌉</span>
+        <span class="task-title">Bygg en bro med trapp på hver side</span>
+      </div>
+      <div class="task-body">
+        <p>Nå kombinerer vi alt! Broen har en trapp opp, en flat brudel, og en trapp ned på andre siden. Del programmet i tre deler:</p>
 
-<!-- OPPGAVE 5 -->
-<div class="task">
-  <div class="task-body">
+        <details class="solution-dropdown">
+          <summary>Vis løsningsforslag</summary>
 
-    <details class="solution-dropdown">
-      <summary>Vis løsningsforslag</summary>
-
-      <div class="code-block">repeat 6 times
+          <div class="code-label">Del 1 – Trapp opp (4 trinn)</div>
+          <div class="code-block">repeat 4 times
     agent place on move  ON
     agent move forward by 1
     agent place on move  OFF
     agent move up by 1</div>
 
-    </details>
-
-  </div>
-</div>
-
-<!-- OPPGAVE 6 -->
-<div class="task">
-  <div class="task-body">
-
-    <details class="solution-dropdown">
-      <summary>Vis løsningsforslag</summary>
-
-      <div class="code-block">repeat 4 times
-    agent place on move  ON
-    agent move forward by 1
-    agent place on move  OFF
-    agent move up by 1
-
-agent place on move  ON
+          <div class="code-label">Del 2 – Flat brudel (8 blokker)</div>
+          <div class="code-block">agent place on move  ON
 agent move forward by 8
-agent place on move  OFF
+agent place on move  OFF</div>
 
-repeat 4 times
+          <div class="code-label">Del 3 – Trapp ned (4 trinn)</div>
+          <div class="code-block">repeat 4 times
     agent place on move  ON
     agent move forward by 1
     agent place on move  OFF
     agent move down by 1</div>
 
-    </details>
+          <div class="tip">💡 Sett alle tre delene etter hverandre i «on start», og agenten bygger hele broen i én kjøring!</div>
+        </details>
+
+        <p><strong>Deloppgaver:</strong></p>
+        <ul class="subtasks">
+          <li>Bygg broen som beskrevet over</li>
+          <li>Gjør brudelen bredere – 3 blokker bred</li>
+          <li>Legg til rekkverk langs sidene av brudelen (én blokk høy vegg på hver side)</li>
+          <li>Bytt materiale – prøv tre, stein og jern</li>
+        </ul>
+        <div class="challenge">✨ <strong>Ekstrautfordring:</strong> Bygg to parallelle broer ved siden av hverandre med litt avstand mellom dem.</div>
+      </div>
+    </div>
+
+    <!-- OPPGAVE 7 -->
+    <div class="task">
+      <div class="task-header">
+        <span class="task-num">7</span>
+        <span class="task-icon">🌟</span>
+        <span class="task-title">Bygg noe stilig – fri oppgave!</span>
+      </div>
+      <div class="task-body">
+        <p>Nå kan du alt du trenger. Bruk løkker, bevegelse og kreativitet til å bygge noe du er stolt av!</p>
+        <p><strong>Trenger du inspirasjon?</strong></p>
+        <ul class="subtasks">
+          <li>Et tårn med spiss topp</li>
+          <li>En pyramide – bygg fra bunn og gjør hver etasje litt smalere</li>
+          <li>En labyrint</li>
+          <li>Et hus med vegger, tak og dør</li>
+          <li>En arena med tribuner rundt</li>
+          <li>Noe helt annet du finner på selv!</li>
+        </ul>
+        <div class="challenge">
+          🏆 <strong>Vis det frem!</strong> Alle viser hva de har bygd, og dere stemmer på favoritten (ikke sin egen). Den med flest stemmer vinner!
+        </div>
+        <div class="tip">💡 Det trenger ikke være perfekt. Det viktigste er at det er bygget med kode – ikke for hånd!</div>
+      </div>
+    </div>
 
   </div>
-</div>
 
-</div>
+  <footer>
+    <p>Teknologilab | <a href="/" style="color: white; text-decoration: none;">Tilbake til forsiden</a></p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      localStorage.setItem('theme', html.getAttribute('data-theme'));
+    }
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+  </script>
 </body>
 </html>
