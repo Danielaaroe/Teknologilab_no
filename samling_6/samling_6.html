@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minecraft Education: Byggeoppgaver - Teknologilab</title>
+  <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #ffffff; --bg-secondary: #f8f9fa; --text: #333;
+      --border: #2c3e50; --header-bg: #0e0e10; --code-bg: #f5f5f5;
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a; --bg-secondary: #2d2d2d; --text: #e0e0e0;
+      --border: #4a90e2; --code-bg: #1e1e1e;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); }
+    header { background: var(--header-bg); color: white; text-align: center; position: relative; }
+    .theme-toggle {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3);
+      color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.2); }
+    .image-container { width: 100%; height: 290px; display: flex; justify-content: center; align-items: center; padding: 2rem; }
+    .image-container img { max-width: 600px; width: 100%; height: auto; object-fit: contain; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .intro { margin: 2rem 0; }
+    .intro h2 { color: var(--border); margin-bottom: 0.75rem; }
+    .intro p { margin-bottom: 0.75rem; }
+    .setup-box {
+      background: var(--bg-secondary); border-radius: 8px;
+      border-left: 4px solid var(--border); padding: 1.25rem; margin: 1rem 0;
+    }
+    .setup-box h3 { margin-bottom: 0.5rem; color: var(--border); }
+    .setup-box ol { margin-left: 1.5rem; }
+    .setup-box li { margin: 0.3rem 0; }
+    .task { border: 2px solid var(--border); border-radius: 12px; margin: 1.5rem 0; overflow: hidden; }
+    .task-header {
+      background: var(--border); color: white;
+      padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .task-num {
+      background: rgba(255,255,255,0.2); border-radius: 50%;
+      width: 36px; height: 36px; display: flex; align-items: center;
+      justify-content: center; font-weight: bold; font-size: 1rem; flex-shrink: 0;
+    }
+    .task-title { font-size: 1.1rem; font-weight: bold; }
+    .task-icon { font-size: 1.5rem; }
+    .task-body { padding: 1.25rem 1.5rem; }
+    .task-body p { margin-bottom: 0.75rem; }
+    .code-block {
+      background: var(--code-bg); padding: 1rem; border-radius: 6px;
+      border-left: 3px solid var(--border); margin: 0.5rem 0 0.75rem;
+      font-family: 'Courier New', monospace; font-size: 0.9em;
+      white-space: pre; overflow-x: auto;
+    }
+    .code-label { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--border); margin-top: 1rem; margin-bottom: 0.2rem; }
+    .tip {
+      background: #fff3cd; color: #856404;
+      padding: 0.75rem 1rem; border-radius: 6px;
+      border-left: 4px solid #ffc107; margin: 0.75rem 0;
+    }
+    [data-theme="dark"] .tip { background: #3a3a2a; color: #e0d090; border-left-color: #b8860b; }
+    .challenge {
+      background: #d4edda; color: #155724;
+      padding: 0.75rem 1rem; border-radius: 6px;
+      border-left: 4px solid #28a745; margin: 0.75rem 0;
+    }
+    [data-theme="dark"] .challenge { background: #2a3a2a; color: #90e0a0; border-left-color: #28a745; }
+    .subtasks { margin: 0.5rem 0 0.75rem 1.5rem; }
+    .subtasks li { margin: 0.35rem 0; }
+
+    /* Dropdown */
+    .solution-dropdown {
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+    .solution-dropdown summary {
+      cursor: pointer;
+      padding: 0.9rem 1rem;
+      font-weight: bold;
+      color: var(--border);
+      list-style: none;
+    }
+    .solution-dropdown summary::-webkit-details-marker { display: none; }
+    .solution-dropdown summary::after { content: " ▼"; float: right; }
+    .solution-dropdown[open] summary::after { content: " ▲"; }
+    .solution-dropdown > *:not(summary) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .solution-dropdown > *:last-child { padding-bottom: 1rem; }
+
+    code { background: var(--code-bg); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 0.92em; }
+    footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- OPPGAVE 1 -->
+<div class="task">
+  <div class="task-body">
+    <p>Agenten skal gå fremover og legge blokker – og lage en rett linje på bakken.</p>
+
+    <details class="solution-dropdown">
+      <summary>Vis løsningsforslag</summary>
+
+      <div class="code-label">MakeCode-blokker</div>
+      <div class="code-block">agent place on move  ON
+agent move forward by 10
+agent place on move  OFF</div>
+
+      <div class="tip">💡 «place on move» legger blokk for hvert steg.</div>
+    </details>
+
+  </div>
+</div>
+
+<!-- OPPGAVE 2 -->
+<div class="task">
+  <div class="task-body">
+
+    <details class="solution-dropdown">
+      <summary>Vis løsningsforslag</summary>
+
+      <div class="code-block">agent place on move  ON
+
+repeat 5 times
+    agent move forward by 5
+    agent place on move  OFF
+    agent turn right
+    agent move forward by 1
+    agent turn left
+    agent place on move  ON
+
+agent place on move  OFF</div>
+
+    </details>
+
+  </div>
+</div>
+
+<!-- OPPGAVE 3 -->
+<div class="task">
+  <div class="task-body">
+
+    <details class="solution-dropdown">
+      <summary>Vis løsningsforslag</summary>
+
+      <div class="code-block">repeat 5 times
+    agent place on move  ON
+    repeat 5 times
+        agent move forward by 5
+        agent place on move  OFF
+        agent turn right
+        agent move forward by 1
+        agent turn left
+        agent place on move  ON
+    agent place on move  OFF
+    agent move up by 1</div>
+
+    </details>
+
+  </div>
+</div>
+
+<!-- OPPGAVE 4 -->
+<div class="task">
+  <div class="task-body">
+
+    <details class="solution-dropdown">
+      <summary>Vis løsningsforslag</summary>
+
+      <div class="code-block">repeat 4 times
+    agent place on move  ON
+    agent move forward by 6
+    agent place on move  OFF
+    agent move up by 1
+    agent turn left
+    agent turn left
+    agent move forward by 6
+    agent turn left
+    agent turn left
+    agent place on move  ON</div>
+
+    </details>
+
+  </div>
+</div>
+
+<!-- OPPGAVE 5 -->
+<div class="task">
+  <div class="task-body">
+
+    <details class="solution-dropdown">
+      <summary>Vis løsningsforslag</summary>
+
+      <div class="code-block">repeat 6 times
+    agent place on move  ON
+    agent move forward by 1
+    agent place on move  OFF
+    agent move up by 1</div>
+
+    </details>
+
+  </div>
+</div>
+
+<!-- OPPGAVE 6 -->
+<div class="task">
+  <div class="task-body">
+
+    <details class="solution-dropdown">
+      <summary>Vis løsningsforslag</summary>
+
+      <div class="code-block">repeat 4 times
+    agent place on move  ON
+    agent move forward by 1
+    agent place on move  OFF
+    agent move up by 1
+
+agent place on move  ON
+agent move forward by 8
+agent place on move  OFF
+
+repeat 4 times
+    agent place on move  ON
+    agent move forward by 1
+    agent place on move  OFF
+    agent move down by 1</div>
+
+    </details>
+
+  </div>
+</div>
+
+</div>
+</body>
+</html>
