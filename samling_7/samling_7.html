@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minecraft Education - Teknologilab</title>
+  <link rel="icon" href="https://www.teknologilab.no/static/favicon/favicon.ico" type="image/x-icon" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --text: #333;
+      --border: #2c3e50;
+      --header-bg: #0e0e10;
+      --accent: #5b8a3c;
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a;
+      --bg-secondary: #2d2d2d;
+      --text: #e0e0e0;
+      --border: #4a90e2;
+      --accent: #7ec850;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--header-bg);
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.2); }
+
+    .image-container {
+      width: 100%;
+      height: 290px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    .image-container img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: var(--border);
+    }
+
+    .link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .link-list li a {
+      display: block;
+      padding: 1rem 1.5rem;
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .link-list li a:hover {
+      border-color: var(--accent);
+      background: var(--bg);
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .image-container { height: 180px; padding: 1rem; }
+      .image-container img { max-width: 400px; }
+      .container { padding: 1rem; }
+      .theme-toggle { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Bytt tema</button>
+    <div class="image-container">
+      <a href="/index.html">
+        <img src="https://www.teknologilab.no/static/teknologilab_full_monochrome.png" alt="Teknologilab logo" />
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>⛏️ FFL2025 - Unhearthed - Advanced Driving Base</h2>
+    <ul class="link-list">
+      <li><a href="https://education.lego.com/en-us/lessons/prime-competition-ready/assembling-an-advanced-driving-base/">Oversikt over dagens oppgave - du finner alle ressurser her!</a></li>
+      <li><a href="https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt2d17fa746ea991e5/5ec8e83df11f7e3ed6d502d7/advanced-driving-base-bi-pdf-book1of5.pdf?locale=en-us">Deloppgave 1</a></li>
+      <li><a href="https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltaab3ff32deffc66d/5ec8e800f32b1a633f9052dd/advanced-driving-base-bi-pdf-book2of5.pdf?locale=en-us">Deloppgave 2</a></li>
+      <li><a href="https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt43751cee8daa89a7/5ec8e7f4f32b1a633f9052d7/advanced-driving-base-bi-pdf-book3of5.pdf?locale=en-us">Deloppgave 3</a></li>
+      <li><a href="https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltbaec24f63e4075fc/5ec8e806f555a00375660930/advanced-driving-base-bi-pdf-book4of5.pdf?locale=en-us">Deloppgave 4</a></li>
+      <li><a href="https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltdfc58a87376f5440/5ec8e868afa52a7b5193fda0/advanced-driving-base-bi-pdf-book5of5.pdf?locale=en-us">Deloppgave 5 - Montering</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>Teknologilab | <a href="/" style="color: white; text-decoration: none;">Tilbake til forsiden</a></p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
